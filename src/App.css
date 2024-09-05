@@ -18,6 +18,11 @@
   font-size: 16px;
   font-weight: 300;
   height: 100vh;
+  transition: grid-template-columns 0.3s ease;
+}
+
+.App.collapsed {
+  grid-template-columns: 80px 1fr;
 }
 
 header {
