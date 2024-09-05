@@ -1,4 +1,6 @@
 import { Helmet } from "react-helmet";
+import Sidebar from "./components/Sidebar";
+import "boxicons";
 import "./App.css";
 
 function App() {
@@ -10,9 +12,9 @@ function App() {
         <link rel="canonical" href="http://mysite.com/example" />
         <meta name="description" content="Sign Language AI App" />
       </Helmet>
-      <header></header>
-      <div className="sidebar"></div>
-      <main></main>
+      <header>{/* Header Content */}</header>
+      <Sidebar />
+      <main>{/* Main Content */}</main>
     </div>
   );
 }
