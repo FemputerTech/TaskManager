@@ -1,5 +1,4 @@
 import { Helmet } from "react-helmet";
-import Navbar from "./components/Navbar";
 import "./App.css";
 
 function App() {
@@ -11,9 +10,7 @@ function App() {
         <link rel="canonical" href="http://mysite.com/example" />
         <meta name="description" content="Sign Language AI App" />
       </Helmet>
-      <header>
-        <Navbar />
-      </header>
+      <header></header>
       <div className="sidebar"></div>
       <main></main>
     </div>
