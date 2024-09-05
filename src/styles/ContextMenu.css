@@ -1,12 +1,26 @@
 /* ****************** Context Menu ****************** */
-context-menu {
+.context-menu {
   position: absolute;
-  display: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   background-color: azure;
-  width: 100px;
-  height: 100px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 200px;
 }
 
-context-menu.active {
-  display: block;
+.option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  padding: 10px 20px;
+}
+
+.option:hover {
+  background-color: aqua;
 }
