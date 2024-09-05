@@ -1,24 +1,29 @@
 /* ****************** Sidebar ****************** */
-.logo {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid black;
-  padding: 10px;
-  height: 100px;
-}
-
 .toggle-container {
   display: flex;
   justify-content: flex-end;
   padding: 10px;
 }
 
-.toggle-container.collapsed {
-  justify-content: center;
-}
-
 .toggle {
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+.logo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid black;
+  padding: 10px;
+  height: 100px;
+}
+
+.logo-text.collapsed {
+  display: none;
+}
+
+.toggle-container.collapsed {
+  justify-content: center;
 }

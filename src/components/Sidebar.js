@@ -12,7 +12,10 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
         </button>
       </div>
       <div className="logo">
-        <span class="logo-text">ToDo</span>
+        <box-icon className="logo-icon" name="note"></box-icon>
+        <span className={`logo-text ${isCollapsed ? "collapsed" : ""}`}>
+          ToDo
+        </span>
       </div>
     </div>
   );
