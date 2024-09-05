@@ -1,13 +1,19 @@
-import React, { useState } from "react";
-import "../styles/sidebar.css";
+import React, { useRef, useState } from "react";
+import ContextMenu from "./ContextMenu";
+import "../styles/Sidebar.css";
 
 function Sidebar({ isCollapsed, toggleSidebar }) {
   const [listItems, setListItems] = useState([]);
+  const contextMenuRef = useRef(null);
 
   const addListItem = () => {
     const newListItem = `Untitled list ${listItems.length + 1}`;
     setListItems([...listItems, newListItem]);
   };
+
+  function handleOnContextMenu(event, rightClickListItem) {
+    console.log("handling context menu:", event);
+  }
   return (
     <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
       <div className={`sidebar-header ${isCollapsed ? "collapsed" : ""}`}>
@@ -36,7 +42,10 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
         </div>
         <ul className="section-list">
           {listItems.map((listItem, index) => (
-            <li key={index}>
+            <li
+              onContextMenu={(event) => handleOnContextMenu(event, listItem)}
+              key={index}
+            >
               <box-icon color="gray" name="grid-vertical"></box-icon>
               {listItem}
             </li>
@@ -48,6 +57,7 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
             </span>
           </button>
         </ul>
+        <ContextMenu contextMenuRef={contextMenuRef} />
       </section>
       <section className="settings">
         <div className="section-title">

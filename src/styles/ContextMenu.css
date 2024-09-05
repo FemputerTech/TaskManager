@@ -1,0 +1,12 @@
+/* ****************** Context Menu ****************** */
+context-menu {
+  position: absolute;
+  display: none;
+  background-color: azure;
+  width: 100px;
+  height: 100px;
+}
+
+context-menu.active {
+  display: block;
+}
