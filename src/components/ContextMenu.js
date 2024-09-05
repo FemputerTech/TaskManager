@@ -24,7 +24,7 @@ const ContextMenu = ({
 
         return (
           <button className="option" onClick={handleClick} key={index}>
-            <span>{option.title}</span>
+            <span>{option.text}</span>
             <box-icon name={option.icon} type="solid"></box-icon>
           </button>
         );

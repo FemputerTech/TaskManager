@@ -86,15 +86,13 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
           positionY={contextMenu.position.y}
           options={[
             {
-              title: "Delete",
-              description: "Delete from list",
+              text: "Delete",
               icon: "message-square-x",
               onClick: () => alert("delete"),
             },
             {
-              title: "Rename",
+              text: "Rename",
               icon: "message-square-edit",
-              description: "Rename list item",
               onClick: () => alert("rename"),
             },
           ]}
