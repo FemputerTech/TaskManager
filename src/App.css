@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  background-color: burlywood;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 80px 1fr;
+  height: 100vh;
+}
+
+header {
+  background-color: aqua;
+  grid-column: 2 / 3;
+  grid-row: 1;
+}
+
+.sidebar {
+  background-color: pink;
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+main {
+  background-color: aquamarine;
+  grid-column: 2;
+  grid-row: 2;
+}
