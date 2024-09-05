@@ -12,7 +12,7 @@
   width: 200px;
 }
 
-.context-menu.action {
+.context-menu.active {
   display: flex;
 }
 
