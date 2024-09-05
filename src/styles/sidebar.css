@@ -53,15 +53,17 @@ box-icon[size="xs"] {
   list-style-type: none;
 }
 
-.section-item {
+.list-item {
+  display: flex;
   padding: 10px 20px;
+  gap: 10px;
 }
 
-.section-item.collapsed {
+.list-item.collapsed {
   display: none;
 }
 
-.section-item:hover {
+.list-item:hover {
   background-color: aqua;
   cursor: pointer;
 }

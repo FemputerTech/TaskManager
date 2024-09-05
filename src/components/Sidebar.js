@@ -60,7 +60,7 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
           {listItems.map((listItem, index) => {
             return (
               <li
-                className={`section-item ${isCollapsed ? "collapsed" : ""}`}
+                className={`list-item ${isCollapsed ? "collapsed" : ""}`}
                 ref={optionRef}
                 onContextMenu={(event) => handleOnContextMenu(event, listItem)}
                 key={index}
