@@ -5,7 +5,6 @@
 }
 
 .App {
-  background-color: burlywood;
   display: grid;
   grid-template-columns: 200px 1fr;
   grid-template-rows: 80px 1fr;
@@ -14,12 +13,14 @@
 
 header {
   background-color: aqua;
+  margin-bottom: 20px;
   grid-column: 2 / 3;
   grid-row: 1;
 }
 
 .sidebar {
   background-color: pink;
+  margin-right: 20px;
   grid-column: 1;
   grid-row: 1 / 3;
 }
