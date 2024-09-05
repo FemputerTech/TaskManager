@@ -34,7 +34,6 @@ header {
 
 .sidebar {
   background-color: pink;
-  /* padding: 20px; */
   grid-column: 1;
   grid-row: 1 / 3;
 }

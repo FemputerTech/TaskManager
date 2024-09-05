@@ -51,7 +51,7 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
       </div>
       <section className="lists">
         <div className="section-title">
-          <box-icon color="gray" name="list-ul"></box-icon>
+          <box-icon color="gray" name="list-ul" size="xs"></box-icon>
           <span className={`section-text ${isCollapsed ? "collapsed" : ""}`}>
             Lists
           </span>
@@ -60,6 +60,7 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
           {listItems.map((listItem, index) => {
             return (
               <li
+                className={`section-item ${isCollapsed ? "collapsed" : ""}`}
                 ref={optionRef}
                 onContextMenu={(event) => handleOnContextMenu(event, listItem)}
                 key={index}
@@ -69,13 +70,16 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
               </li>
             );
           })}
-          <button className="new-item-button" onClick={addListItem}>
-            <box-icon name="plus"></box-icon>
-            <span className={`section-text ${isCollapsed ? "collapsed" : ""}`}>
-              Create new list
-            </span>
-          </button>
         </ul>
+        <button
+          className={`new-item-button ${isCollapsed ? "collapsed" : ""}`}
+          onClick={addListItem}
+        >
+          <box-icon name="plus"></box-icon>
+          <span className={`button-text ${isCollapsed ? "collapsed" : ""}`}>
+            Create new list
+          </span>
+        </button>
         <ContextMenu
           isToggled={contextMenu.toggled}
           positionX={contextMenu.position.x}
@@ -98,7 +102,7 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
       </section>
       <section className="settings">
         <div className="section-title">
-          <box-icon color="gray" name="cog" type="regular"></box-icon>
+          <box-icon color="gray" name="cog" type="regular" size="xs"></box-icon>
           <span className={`section-text ${isCollapsed ? "collapsed" : ""}`}>
             Settings
           </span>
