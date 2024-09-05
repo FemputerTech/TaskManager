@@ -4,6 +4,13 @@ import "../styles/Sidebar.css";
 
 function Sidebar({ isCollapsed, toggleSidebar }) {
   const [listItems, setListItems] = useState([]);
+  const [contextMenu, setContextMenu] = useState({
+    position: {
+      x: 0,
+      y: 0,
+    },
+    toggled: false,
+  });
   const contextMenuRef = useRef(null);
 
   const addListItem = () => {
@@ -57,7 +64,26 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
             </span>
           </button>
         </ul>
-        <ContextMenu contextMenuRef={contextMenuRef} />
+        <ContextMenu
+          contextMenuRef={contextMenuRef}
+          isToggled={contextMenu.toggled}
+          options={[
+            {
+              title: "Delete",
+              description: "Delete from list",
+              icon: "message-square-x",
+              onClick: () => alert("delete"),
+            },
+            {
+              title: "Rename",
+              icon: "message-square-edit",
+              description: "Rename list item",
+              onClick: () => alert("rename"),
+            },
+          ]}
+          positionX={0}
+          positionY={0}
+        />
       </section>
       <section className="settings">
         <div className="section-title">
