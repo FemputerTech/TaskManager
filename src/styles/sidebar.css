@@ -6,3 +6,19 @@
   padding: 10px;
   height: 100px;
 }
+
+.toggle-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.toggle-container.collapsed {
+  justify-content: center;
+}
+
+.toggle {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
