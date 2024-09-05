@@ -11,7 +11,7 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
     },
     toggled: false,
   });
-  const contextMenuRef = useRef(null);
+  const optionRef = useRef(null);
 
   const addListItem = () => {
     const newListItem = `Untitled list ${listItems.length + 1}`;
@@ -19,7 +19,16 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
   };
 
   function handleOnContextMenu(event, rightClickListItem) {
-    console.log("handling context menu:", event);
+    event.preventDefault();
+    const listItemAttr = optionRef.current.getBoundingClientRect();
+    console.log(listItemAttr);
+    setContextMenu({
+      position: {
+        x: listItemAttr.right - 60,
+        y: listItemAttr.top - 100,
+      },
+      toggled: true,
+    });
   }
   return (
     <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
@@ -48,15 +57,18 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
           </span>
         </div>
         <ul className="section-list">
-          {listItems.map((listItem, index) => (
-            <li
-              onContextMenu={(event) => handleOnContextMenu(event, listItem)}
-              key={index}
-            >
-              <box-icon color="gray" name="grid-vertical"></box-icon>
-              {listItem}
-            </li>
-          ))}
+          {listItems.map((listItem, index) => {
+            return (
+              <li
+                ref={optionRef}
+                onContextMenu={(event) => handleOnContextMenu(event, listItem)}
+                key={index}
+              >
+                <box-icon color="gray" name="grid-vertical"></box-icon>
+                {listItem}
+              </li>
+            );
+          })}
           <button className="new-item-button" onClick={addListItem}>
             <box-icon name="plus"></box-icon>
             <span className={`section-text ${isCollapsed ? "collapsed" : ""}`}>
@@ -65,8 +77,9 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
           </button>
         </ul>
         <ContextMenu
-          contextMenuRef={contextMenuRef}
           isToggled={contextMenu.toggled}
+          positionX={contextMenu.position.x}
+          positionY={contextMenu.position.y}
           options={[
             {
               title: "Delete",
@@ -81,8 +94,6 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
               onClick: () => alert("rename"),
             },
           ]}
-          positionX={0}
-          positionY={0}
         />
       </section>
       <section className="settings">
