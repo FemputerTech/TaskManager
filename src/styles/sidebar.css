@@ -1,8 +1,15 @@
 /* ****************** Sidebar ****************** */
-.toggle-container {
+.sidebar-header {
   display: flex;
-  justify-content: flex-end;
-  padding: 10px;
+  justify-content: space-between;
+  margin: 20px;
+  height: 80px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .toggle {
@@ -11,19 +18,42 @@
   cursor: pointer;
 }
 
-.logo {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border-bottom: 1px solid black;
-  padding: 10px;
-  height: 100px;
+.toggle-container.collapsed {
+  justify-content: center;
 }
 
 .logo-text.collapsed {
   display: none;
 }
 
-.toggle-container.collapsed {
-  justify-content: center;
+section {
+  background-color: aqua;
+  margin: 20px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid gray;
+  color: gray;
+  width: 100%;
+  gap: 10px;
+}
+
+.section-text.collapsed {
+  display: none;
+}
+
+.section-list {
+  list-style-type: none;
+}
+
+.new-item-button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  width: 100%;
+  gap: 10px;
 }
