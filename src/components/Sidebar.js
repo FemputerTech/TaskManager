@@ -4,8 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../styles/Sidebar.css";
 
 function Sidebar({ isCollapsed, toggleSidebar }) {
-  const [activeItemIndex, setActiveItemIndex] = useState(null);
   const [listItems, setListItems] = useState([]);
+  const [activeItemIndex, setActiveItemIndex] = useState(null);
+  const [clickedItemIndex, setClickedItemIndex] = useState(null);
   const [contextMenu, setContextMenu] = useState({
     position: {
       x: 0,
@@ -15,8 +16,14 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
   });
   const optionRef = useRef(null);
 
-  const handleItemClick = (index) => {
-    setActiveItemIndex(index);
+  const handleItemClick = (type, index) => {
+    if (type === "click") {
+      setActiveItemIndex(index);
+    } else if (type === "mouseDown") {
+      setClickedItemIndex(index);
+    } else {
+      setClickedItemIndex(null);
+    }
   };
 
   const addListItem = () => {
@@ -92,10 +99,12 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
               <li
                 className={`list-item ${isCollapsed ? "collapsed" : ""} ${
                   activeItemIndex === index ? "active" : ""
-                }`}
+                } ${clickedItemIndex === index ? "clicked" : ""}`}
                 ref={index === activeItemIndex ? optionRef : null}
                 onContextMenu={(event) => handleOnContextMenu(event, listItem)}
-                onClick={() => handleItemClick(index)}
+                onClick={() => handleItemClick("click", index)}
+                onMouseDown={() => handleItemClick("mouseDown", index)}
+                onMouseUp={() => handleItemClick("mouseUp", index)}
                 key={index}
               >
                 {listItem}

@@ -57,9 +57,14 @@ section {
   display: none;
 }
 
+.list-item.active,
 .list-item:hover {
   background-color: #efefed;
   cursor: pointer;
+}
+
+.list-item.clicked {
+  background-color: var(--click);
 }
 
 .new-item-button {
