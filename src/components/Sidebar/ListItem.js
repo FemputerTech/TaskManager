@@ -1,19 +1,16 @@
 import React, { useState, useRef } from "react";
 
-function ListItem({ listItem, isCollapsed, setContextMenu }) {
-  const [isActive, setIsActive] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
+function ListItem({
+  listItem,
+  isActive,
+  isClicked,
+  onClick,
+  onMouseDown,
+  onMouseUp,
+  isCollapsed,
+  setContextMenu,
+}) {
   const optionRef = useRef(null);
-
-  const handleItemClick = (type) => {
-    if (type === "click") {
-      setIsActive(true);
-    } else if (type === "mouseDown") {
-      setIsClicked(true);
-    } else {
-      setIsClicked(false);
-    }
-  };
 
   function handleOnContextMenu(event, rightClickListItem) {
     event.preventDefault();
@@ -34,9 +31,9 @@ function ListItem({ listItem, isCollapsed, setContextMenu }) {
       } ${isClicked ? "clicked" : ""}`}
       ref={optionRef}
       onContextMenu={(event) => handleOnContextMenu(event, listItem)}
-      onClick={() => handleItemClick("click")}
-      onMouseDown={() => handleItemClick("mouseDown")}
-      onMouseUp={() => handleItemClick("mouseUp")}
+      onClick={onClick}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
     >
       {listItem}
     </li>

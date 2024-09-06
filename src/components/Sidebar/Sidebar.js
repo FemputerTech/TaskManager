@@ -8,6 +8,8 @@ import "../../styles/Sidebar.css";
 
 function Sidebar({ isCollapsed, toggleSidebar }) {
   const [listItems, setListItems] = useState([]);
+  const [activeItemIndex, setActiveItemIndex] = useState(null);
+  const [clickedItemIndex, setClickedItemIndex] = useState(null);
   const [contextMenu, setContextMenu] = useState({
     position: {
       x: 0,
@@ -15,6 +17,16 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
     },
     toggled: false,
   });
+
+  const handleItemClick = (type, index) => {
+    if (type === "click") {
+      setActiveItemIndex(index);
+    } else if (type === "mousedown") {
+      setClickedItemIndex(index);
+    } else {
+      setClickedItemIndex(null);
+    }
+  };
 
   const addListItem = () => {
     const newListItem = `Untitled list ${listItems.length + 1}`;
@@ -42,6 +54,11 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
             <ListItem
               key={index}
               listItem={listItem}
+              isActive={index === activeItemIndex}
+              isClicked={index === clickedItemIndex}
+              onClick={(event) => handleItemClick(event.type, index)}
+              onMouseDown={(event) => handleItemClick(event.type, index)}
+              onMouseUp={(event) => handleItemClick(event.type, index)}
               isCollapsed={isCollapsed}
               setContextMenu={setContextMenu}
             />
