@@ -1,40 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import SidebarHeader from "./SidebarHeader";
 import SectionHeader from "./SectionHeader";
-import ListItem from "./ListItem";
-import ContextMenu from "../ContextMenu";
+import List from "./List";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../styles/Sidebar/Sidebar.css";
 
 function Sidebar({ isCollapsed, toggleSidebar, setActiveList }) {
   const [listItems, setListItems] = useState([]);
-  const [activeItemIndex, setActiveItemIndex] = useState(null);
-  const [clickedItemIndex, setClickedItemIndex] = useState(null);
-  const [contextMenu, setContextMenu] = useState({
-    position: {
-      x: 0,
-      y: 0,
-    },
-    toggled: false,
-  });
+  const [activeListIndex, setActiveListIndex] = useState(null);
+  const [clickedListIndex, setClickedListIndex] = useState(null);
+  const optionRef = useRef(null);
 
   const handleItemClick = (type, index) => {
     if (type === "click") {
-      setActiveItemIndex(index);
+      setActiveListIndex(index);
       setActiveList(listItems[index]);
     } else if (type === "mousedown") {
-      setClickedItemIndex(index);
+      setClickedListIndex(index);
     } else {
-      setClickedItemIndex(null);
+      setClickedListIndex(null);
     }
   };
 
   const addListItem = () => {
-    const newListItem = "Untitled";
+    const newListItem = { title: "Untitled" };
     setListItems([...listItems, newListItem]);
     setActiveList(newListItem);
   };
-
   return (
     <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
       <SidebarHeader isCollapsed={isCollapsed} toggleSidebar={toggleSidebar} />
@@ -53,16 +45,16 @@ function Sidebar({ isCollapsed, toggleSidebar, setActiveList }) {
         />
         <ul className="lists">
           {listItems.map((listItem, index) => (
-            <ListItem
+            <List
               key={index}
-              listItem={listItem}
-              isActive={index === activeItemIndex}
-              isClicked={index === clickedItemIndex}
+              title={listItem.title}
+              isActive={index === activeListIndex}
+              isClicked={index === clickedListIndex}
               onClick={(event) => handleItemClick(event.type, index)}
               onMouseDown={(event) => handleItemClick(event.type, index)}
               onMouseUp={(event) => handleItemClick(event.type, index)}
               isCollapsed={isCollapsed}
-              setContextMenu={setContextMenu}
+              optionRef={optionRef}
             />
           ))}
         </ul>
@@ -75,28 +67,6 @@ function Sidebar({ isCollapsed, toggleSidebar, setActiveList }) {
             Create new list
           </span>
         </button>
-        <ContextMenu
-          isToggled={contextMenu.toggled}
-          positionX={contextMenu.position.x}
-          positionY={contextMenu.position.y}
-          options={[
-            {
-              text: "Favorite",
-              icon: "fa-solid fa-star",
-              onClick: () => alert("rename"),
-            },
-            {
-              text: "Rename",
-              icon: "fa-solid fa-pen-to-square",
-              onClick: () => alert("rename"),
-            },
-            {
-              text: "Delete",
-              icon: "fa-solid fa-trash-can",
-              onClick: () => alert("delete"),
-            },
-          ]}
-        />
       </section>
     </div>
   );
