@@ -1,11 +1,12 @@
 /* ****************** List Item ****************** */
 .list-item {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-radius: 10px;
   cursor: pointer;
   padding: 10px;
   margin: 2px;
-  gap: 10px;
 }
 
 .list-item.collapsed {
@@ -23,9 +24,31 @@
 
 .list-item.active.clicked,
 .list-item.clicked {
-  background-color: var(--neutral-3);
+  background-color: var(--neutral-4);
+}
+
+.list-title-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .list-item-title.collapsed {
+  display: none;
+}
+
+.list-delete {
+  background-color: transparent;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.list-delete:hover {
+  background-color: var(--neutral-3);
+}
+
+.list-delete.collapsed {
   display: none;
 }

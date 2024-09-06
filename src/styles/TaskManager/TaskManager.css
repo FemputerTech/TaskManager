@@ -1,0 +1,10 @@
+/* ****************** Task Manager ****************** */
+.task-manager-title {
+  background-color: transparent;
+  border: none;
+  font-size: 3em;
+}
+
+.task-manager-title:focus {
+  outline: none;
+}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "./components/Sidebar/Sidebar";
-import Dashboard from "./components/Dashboard/Dashboard";
+import TaskManager from "./components/TaskManager/TaskManager";
 import { Helmet } from "react-helmet";
 import "./App.css";
 
@@ -38,12 +38,13 @@ function App() {
         isCollapsed={isSidebarCollapsed}
         toggleSidebar={toggleSidebar}
         listItems={listItems}
+        setListItems={setListItems}
         setActiveListIndex={setActiveListIndex}
         activeListIndex={activeListIndex}
         addListItem={addListItem}
       />
       <main>
-        <Dashboard
+        <TaskManager
           list={activeListIndex !== null ? listItems[activeListIndex] : null}
           updateListTitle={(newTitle) =>
             updateListTitle(activeListIndex, newTitle)

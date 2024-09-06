@@ -9,6 +9,7 @@ function Sidebar({
   isCollapsed,
   toggleSidebar,
   listItems,
+  setListItems,
   setActiveListIndex,
   activeListIndex,
   addListItem,
@@ -24,6 +25,18 @@ function Sidebar({
       setClickedListIndex(null);
     }
   };
+
+  const handleItemDelete = (index) => (event) => {
+    event.stopPropagation();
+    const newListItems = listItems.filter((_, i) => i !== index);
+    setListItems(newListItems);
+    if (activeListIndex === index) {
+      setActiveListIndex(null);
+    } else if (activeListIndex > index) {
+      setActiveListIndex(activeListIndex - 1);
+    }
+  };
+
   return (
     <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
       <SidebarHeader isCollapsed={isCollapsed} toggleSidebar={toggleSidebar} />
@@ -50,6 +63,7 @@ function Sidebar({
               onClick={(event) => handleItemClick(event.type, index)}
               onMouseDown={(event) => handleItemClick(event.type, index)}
               onMouseUp={(event) => handleItemClick(event.type, index)}
+              onDelete={handleItemDelete(index)}
               isCollapsed={isCollapsed}
             />
           ))}

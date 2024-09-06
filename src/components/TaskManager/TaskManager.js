@@ -1,16 +1,15 @@
 import React from "react";
-import "../../styles/Dashboard/Dashboard.css";
+import "../../styles/TaskManager/TaskManager.css";
 
-function Dashboard({ list, updateListTitle }) {
+function TaskManager({ list, updateListTitle }) {
   const handleOnChange = (event) => {
     updateListTitle(event.target.value);
   };
-
   return (
-    <div className="dashboard">
+    <div className="task-manager">
       {list ? (
         <input
-          className="dashboard-title"
+          className="task-manager-title"
           type="text"
           value={list.title}
           onChange={handleOnChange}
@@ -23,4 +22,4 @@ function Dashboard({ list, updateListTitle }) {
   );
 }
 
-export default Dashboard;
+export default TaskManager;

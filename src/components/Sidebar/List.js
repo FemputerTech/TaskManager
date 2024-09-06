@@ -9,6 +9,7 @@ function List({
   onClick,
   onMouseDown,
   onMouseUp,
+  onDelete,
   isCollapsed,
 }) {
   return (
@@ -20,10 +21,25 @@ function List({
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
     >
-      <FontAwesomeIcon className="list-item-icon" icon="fa-regular fa-file" />
-      <span className={`list-item-title ${isCollapsed ? "collapsed" : ""}`}>
-        {title}
-      </span>
+      <div className="list-title-container">
+        <FontAwesomeIcon
+          className="list-item-icon"
+          icon="fa-regular fa-file"
+          color="var(--text-faint)"
+        />
+        <span className={`list-item-title ${isCollapsed ? "collapsed" : ""}`}>
+          {title}
+        </span>
+      </div>
+      <button
+        className={`list-delete ${isCollapsed ? "collapsed" : ""}`}
+        onClick={onDelete}
+      >
+        <FontAwesomeIcon
+          icon="fa-solid fa-trash-can"
+          color="var(--text-faint)"
+        />
+      </button>
     </li>
   );
 }
