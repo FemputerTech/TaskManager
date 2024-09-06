@@ -12,7 +12,11 @@
   --text-normal: #1d1b16;
   --text-muted: #7a7975;
   --text-faint: #91918e;
-  --click: #d1d1cf;
+
+  --neutral-1: #efefed;
+  --neutral-2: #e8e8e6;
+  --neutral-3: #d1d1cf;
+
   --font-family: "Poppins", sans-serif;
 }
 
