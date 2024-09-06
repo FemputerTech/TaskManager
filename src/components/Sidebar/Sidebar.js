@@ -6,7 +6,7 @@ import ContextMenu from "../ContextMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../styles/Sidebar/Sidebar.css";
 
-function Sidebar({ isCollapsed, toggleSidebar }) {
+function Sidebar({ isCollapsed, toggleSidebar, setActiveList }) {
   const [listItems, setListItems] = useState([]);
   const [activeItemIndex, setActiveItemIndex] = useState(null);
   const [clickedItemIndex, setClickedItemIndex] = useState(null);
@@ -21,6 +21,7 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
   const handleItemClick = (type, index) => {
     if (type === "click") {
       setActiveItemIndex(index);
+      setActiveList(listItems[index]);
     } else if (type === "mousedown") {
       setClickedItemIndex(index);
     } else {
@@ -31,6 +32,7 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
   const addListItem = () => {
     const newListItem = "Untitled";
     setListItems([...listItems, newListItem]);
+    setActiveList(newListItem);
   };
 
   return (

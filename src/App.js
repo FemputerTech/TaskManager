@@ -5,10 +5,12 @@ import "./App.css";
 
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [activeList, setActiveList] = useState(null);
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
   };
+
   return (
     <div className={`App ${isSidebarCollapsed ? "collapsed" : ""}`}>
       <Helmet>
@@ -18,8 +20,12 @@ function App() {
         <meta name="description" content="Sign Language AI App" />
       </Helmet>
       <header>{/* Header Content */}</header>
-      <Sidebar isCollapsed={isSidebarCollapsed} toggleSidebar={toggleSidebar} />
-      <main>{/* Main Content */}</main>
+      <Sidebar
+        isCollapsed={isSidebarCollapsed}
+        toggleSidebar={toggleSidebar}
+        setActiveList={setActiveList}
+      />
+      <main>{activeList}</main>
     </div>
   );
 }
