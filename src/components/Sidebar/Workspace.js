@@ -23,7 +23,7 @@ function WorkSpace({
     >
       <div className="workspace-title">
         <FontAwesomeIcon
-          className="list-item-icon"
+          className="workspace-icon"
           icon="fa-regular fa-file"
           color="var(--text-faint)"
         />
