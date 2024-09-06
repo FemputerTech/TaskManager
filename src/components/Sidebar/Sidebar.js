@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import SidebarHeader from "./SidebarHeader";
 import SectionHeader from "./SectionHeader";
-import Workspace from "./Workspace";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../styles/Sidebar/Sidebar.css";
 
@@ -54,7 +53,7 @@ function Sidebar({
           isCollapsed={isCollapsed}
         />
         <ul className="lists">
-          {listItems.map((listItem, index) => (
+          {/* {listItems.map((listItem, index) => (
             <Workspace
               key={index}
               title={listItem.title}
@@ -66,7 +65,7 @@ function Sidebar({
               onDelete={handleItemDelete(index)}
               isCollapsed={isCollapsed}
             />
-          ))}
+          ))} */}
         </ul>
         <button
           className={`new-item-button ${isCollapsed ? "collapsed" : ""}`}
