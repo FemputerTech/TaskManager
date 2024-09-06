@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Sidebar from "./components/Sidebar/Sidebar";
+import Dashboard from "./components/Dashboard/Dashboard";
 import { Helmet } from "react-helmet";
 import "./App.css";
 
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [activeList, setActiveList] = useState(null);
+  const [activeList, setActiveList] = useState("");
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
@@ -24,8 +25,11 @@ function App() {
         isCollapsed={isSidebarCollapsed}
         toggleSidebar={toggleSidebar}
         setActiveList={setActiveList}
+        activeList={activeList}
       />
-      <main>{activeList}</main>
+      <main>
+        <Dashboard list={activeList} />
+      </main>
     </div>
   );
 }
