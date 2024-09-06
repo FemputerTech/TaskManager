@@ -6,23 +6,23 @@ import "./App.css";
 
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [listItems, setListItems] = useState([]);
-  const [activeListIndex, setActiveListIndex] = useState(null);
+  const [workspaces, setWorkspaces] = useState([]);
+  const [activeWorkspaceIndex, setActiveWorkspaceIndex] = useState(null);
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
   };
 
-  const addListItem = () => {
-    const newListItem = { title: "Untitled" };
-    setListItems([...listItems, newListItem]);
-    setActiveListIndex(listItems.length);
+  const addWorkspace = () => {
+    const newWorkspace = { title: "Untitled" };
+    setWorkspaces([...workspaces, newWorkspace]);
+    setActiveWorkspaceIndex(workspaces.length);
   };
 
-  const updateListTitle = (index, newTitle) => {
-    const updatedListItems = [...listItems];
-    updatedListItems[index] = { ...updatedListItems[index], title: newTitle };
-    setListItems(updatedListItems);
+  const updateWorkspaceTitle = (index, newTitle) => {
+    const updatedWorkspaces = [...workspaces];
+    updatedWorkspaces[index] = { ...updatedWorkspaces[index], title: newTitle };
+    setWorkspaces(updatedWorkspaces);
   };
 
   return (
@@ -37,17 +37,21 @@ function App() {
       <Sidebar
         isCollapsed={isSidebarCollapsed}
         toggleSidebar={toggleSidebar}
-        listItems={listItems}
-        setListItems={setListItems}
-        setActiveListIndex={setActiveListIndex}
-        activeListIndex={activeListIndex}
-        addListItem={addListItem}
+        workspaces={workspaces}
+        setWorkspaces={setWorkspaces}
+        activeWorkspaceIndex={activeWorkspaceIndex}
+        setActiveWorkspaceIndex={setActiveWorkspaceIndex}
+        addWorkspace={addWorkspace}
       />
       <main>
         <TaskManager
-          list={activeListIndex !== null ? listItems[activeListIndex] : null}
-          updateListTitle={(newTitle) =>
-            updateListTitle(activeListIndex, newTitle)
+          workspace={
+            activeWorkspaceIndex !== null
+              ? workspaces[activeWorkspaceIndex]
+              : null
+          }
+          updateWorkspaceTitle={(newTitle) =>
+            updateWorkspaceTitle(activeWorkspaceIndex, newTitle)
           }
         />
       </main>

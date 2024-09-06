@@ -3,11 +3,11 @@ section {
   margin-bottom: 40px;
 }
 
-.lists {
+.workspaces {
   list-style-type: none;
 }
 
-.new-item-button {
+.new-workspace-button {
   display: flex;
   align-items: center;
   background-color: transparent;
@@ -22,14 +22,14 @@ section {
   gap: 10px;
 }
 
-.button-text.collapsed {
-  display: none;
-}
-
-.new-item-button.collapsed {
+.new-workspace-button.collapsed {
   justify-content: center;
 }
 
-.new-item-button:hover {
+.new-workspace-button:hover {
   background-color: var(--neutral-1);
+}
+
+.button-text.collapsed {
+  display: none;
 }

@@ -8,32 +8,32 @@ import "../../styles/Sidebar/Sidebar.css";
 function Sidebar({
   isCollapsed,
   toggleSidebar,
-  listItems,
-  setListItems,
-  setActiveListIndex,
-  activeListIndex,
-  addListItem,
+  workspaces,
+  setWorkspaces,
+  activeWorkspaceIndex,
+  setActiveWorkspaceIndex,
+  addWorkspace,
 }) {
-  const [clickedListIndex, setClickedListIndex] = useState(null);
+  const [clickedWorkspaceIndex, setClickedWorkspaceIndex] = useState(null);
 
   const handleItemClick = (type, index) => {
     if (type === "click") {
-      setActiveListIndex(index);
+      setActiveWorkspaceIndex(index);
     } else if (type === "mousedown") {
-      setClickedListIndex(index);
+      setClickedWorkspaceIndex(index);
     } else {
-      setClickedListIndex(null);
+      setClickedWorkspaceIndex(null);
     }
   };
 
   const handleItemDelete = (index) => (event) => {
     event.stopPropagation();
-    const newListItems = listItems.filter((_, i) => i !== index);
-    setListItems(newListItems);
-    if (activeListIndex === index) {
-      setActiveListIndex(null);
-    } else if (activeListIndex > index) {
-      setActiveListIndex(activeListIndex - 1);
+    const newWorkspaces = workspaces.filter((_, i) => i !== index);
+    setWorkspaces(newWorkspaces);
+    if (activeWorkspaceIndex === index) {
+      setActiveWorkspaceIndex(null);
+    } else if (activeWorkspaceIndex > index) {
+      setActiveWorkspaceIndex(activeWorkspaceIndex - 1);
     }
   };
 
@@ -53,13 +53,13 @@ function Sidebar({
           icon="fa-solid fa-list-ul"
           isCollapsed={isCollapsed}
         />
-        <ul className="lists">
-          {listItems.map((listItem, index) => (
+        <ul className="workspaces">
+          {workspaces.map((workspace, index) => (
             <Workspace
               key={index}
-              title={listItem.title}
-              isActive={index === activeListIndex}
-              isClicked={index === clickedListIndex}
+              title={workspace.title}
+              isActive={index === activeWorkspaceIndex}
+              isClicked={index === clickedWorkspaceIndex}
               onClick={(event) => handleItemClick(event.type, index)}
               onMouseDown={(event) => handleItemClick(event.type, index)}
               onMouseUp={(event) => handleItemClick(event.type, index)}
@@ -69,12 +69,12 @@ function Sidebar({
           ))}
         </ul>
         <button
-          className={`new-item-button ${isCollapsed ? "collapsed" : ""}`}
-          onClick={addListItem}
+          className={`new-workspace-button ${isCollapsed ? "collapsed" : ""}`}
+          onClick={addWorkspace}
         >
           <FontAwesomeIcon icon="fa-solid fa-plus" color="var(--text-normal)" />
           <span className={`button-text ${isCollapsed ? "collapsed" : ""}`}>
-            Create new list
+            Add new workspace
           </span>
         </button>
       </section>

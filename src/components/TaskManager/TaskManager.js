@@ -1,22 +1,22 @@
 import React from "react";
 import "../../styles/TaskManager/TaskManager.css";
 
-function TaskManager({ list, updateListTitle }) {
+function TaskManager({ workspace, updateWorkspaceTitle }) {
   const handleOnChange = (event) => {
-    updateListTitle(event.target.value);
+    updateWorkspaceTitle(event.target.value);
   };
   return (
     <div className="task-manager">
-      {list ? (
+      {workspace ? (
         <input
           className="task-manager-title"
           type="text"
-          value={list.title}
+          value={workspace.title}
           onChange={handleOnChange}
           placeholder="Untitled"
         />
       ) : (
-        <p>Select a list from the sidebar or create a new one</p>
+        <p>Select a workspace from the sidebar or create a new one</p>
       )}
     </div>
   );
