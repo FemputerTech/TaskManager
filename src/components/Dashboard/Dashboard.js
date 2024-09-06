@@ -10,10 +10,11 @@ function Dashboard({ list, updateListTitle }) {
     <div className="dashboard">
       {list ? (
         <input
+          className="dashboard-title"
           type="text"
           value={list.title}
           onChange={handleOnChange}
-          placeholder="Enter list title"
+          placeholder="Untitled"
         />
       ) : (
         <p>Select a list from the sidebar or create a new one</p>

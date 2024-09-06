@@ -1,1 +1,10 @@
 /* ****************** Dashboard ****************** */
+.dashboard-title {
+  background-color: transparent;
+  border: none;
+  font-size: 3em;
+}
+
+.dashboard-title:focus {
+  outline: none;
+}
