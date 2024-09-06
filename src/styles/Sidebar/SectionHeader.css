@@ -6,12 +6,12 @@
   gap: 10px;
 }
 
-.section-text {
+.section-header-text {
   color: var(--text-faint);
   font-size: 12px;
   font-weight: 500;
 }
 
-.section-text.collapsed {
+.section-header-text.collapsed {
   display: none;
 }

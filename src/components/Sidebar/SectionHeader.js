@@ -11,7 +11,7 @@ function SectionHeader({ text, icon, isCollapsed }) {
         color="var(--text-faint)"
         size="xs"
       />
-      <span className={`section-text ${isCollapsed ? "collapsed" : ""}`}>
+      <span className={`section-header-text ${isCollapsed ? "collapsed" : ""}`}>
         {text}
       </span>
     </div>

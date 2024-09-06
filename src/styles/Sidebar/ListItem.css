@@ -26,6 +26,6 @@
   background-color: var(--neutral-3);
 }
 
-.item-title.collapsed {
+.list-item-title.collapsed {
   display: none;
 }

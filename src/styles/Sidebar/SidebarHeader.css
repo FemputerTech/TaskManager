@@ -15,7 +15,7 @@
   display: none;
 }
 
-.toggle {
+.sidebar-toggle {
   background-color: transparent;
   border: none;
   cursor: pointer;

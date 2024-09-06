@@ -37,8 +37,8 @@ function ListItem({
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
     >
-      <FontAwesomeIcon className="item-icon" icon="fa-regular fa-file" />
-      <span className={`item-title ${isCollapsed ? "collapsed" : ""}`}>
+      <FontAwesomeIcon className="list-item-icon" icon="fa-regular fa-file" />
+      <span className={`list-item-title ${isCollapsed ? "collapsed" : ""}`}>
         {listItem}
       </span>
     </li>

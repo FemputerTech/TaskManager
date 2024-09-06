@@ -17,7 +17,7 @@ function SidebarHeader({ isCollapsed, toggleSidebar }) {
         </span>
       </div>
       <button
-        className="toggle"
+        className="sidebar-toggle"
         onClick={toggleSidebar}
         aria-label="collapse sidebar"
       >
