@@ -78,10 +78,12 @@ section {
   align-items: center;
   background-color: transparent;
   border: none;
+  border-radius: 10px;
   color: var(--text-normal);
   cursor: pointer;
   font-size: var(--font-size);
   padding: 10px;
+  margin: 2px;
   width: 100%;
   gap: 10px;
 }
@@ -92,4 +94,8 @@ section {
 
 .new-item-button.collapsed {
   justify-content: center;
+}
+
+.new-item-button:hover {
+  background-color: var(--neutral-1);
 }
