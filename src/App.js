@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "./components/Sidebar";
 import { Helmet } from "react-helmet";
-import "boxicons";
 import "./App.css";
 
 function App() {
