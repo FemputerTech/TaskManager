@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/Dashboard/Dashboard.css";
 
 function Dashboard({ list }) {
+  const [updateTitle, setUpdateTitle] = useState(list.title);
+
+  const handleOnChange = (event) => {
+    setUpdateTitle(event.target.value);
+  };
+
   return (
     <div className="dashboard">
-      <h1>{list.title}</h1>
+      <input type="text" value={updateTitle} onChange={handleOnChange}></input>
     </div>
   );
 }
