@@ -13,7 +13,10 @@ import {
   faStar as faStarSolid,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
-import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
+import {
+  faStar as faStarRegular,
+  faFile,
+} from "@fortawesome/free-regular-svg-icons";
 
 library.add(
   faNoteSticky,
@@ -24,7 +27,8 @@ library.add(
   faPenToSquare,
   faStarSolid,
   faStarRegular,
-  faTrashCan
+  faTrashCan,
+  faFile
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

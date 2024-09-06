@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function ListItem({
   listItem,
@@ -35,6 +36,7 @@ function ListItem({
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
     >
+      <FontAwesomeIcon icon="fa-regular fa-file" />
       {listItem}
     </li>
   );
