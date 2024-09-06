@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import SidebarHeader from "./SidebarHeader";
-import SectionTitle from "./SectionTitle";
+import SectionHeader from "./SectionHeader";
 import ListItem from "./ListItem";
 import ContextMenu from "../ContextMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../../styles/Sidebar.css";
+import "../../styles/Sidebar/Sidebar.css";
 
 function Sidebar({ isCollapsed, toggleSidebar }) {
   const [listItems, setListItems] = useState([]);
@@ -37,19 +37,19 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
     <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
       <SidebarHeader isCollapsed={isCollapsed} toggleSidebar={toggleSidebar} />
       <section className="favorites">
-        <SectionTitle
+        <SectionHeader
           text="Favorites"
           icon="fa-regular fa-star"
           isCollapsed={isCollapsed}
         />
       </section>
       <section className="private">
-        <SectionTitle
+        <SectionHeader
           text="Private"
           icon="fa-solid fa-list-ul"
           isCollapsed={isCollapsed}
         />
-        <ul className="section-list">
+        <ul className="lists">
           {listItems.map((listItem, index) => (
             <ListItem
               key={index}

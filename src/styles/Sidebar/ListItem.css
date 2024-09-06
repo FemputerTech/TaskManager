@@ -1,0 +1,31 @@
+/* ****************** List Item ****************** */
+.list-item {
+  display: flex;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 10px;
+  margin: 2px;
+  gap: 10px;
+}
+
+.list-item.collapsed {
+  justify-content: center;
+}
+
+.list-item.active,
+.list-item:hover {
+  background-color: var(--neutral-1);
+}
+
+.list-item.active:hover {
+  background-color: var(--neutral-2);
+}
+
+.list-item.active.clicked,
+.list-item.clicked {
+  background-color: var(--neutral-3);
+}
+
+.item-title.collapsed {
+  display: none;
+}

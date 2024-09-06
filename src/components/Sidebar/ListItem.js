@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../../styles/Sidebar/ListItem.css";
 
 function ListItem({
   listItem,
@@ -27,7 +28,7 @@ function ListItem({
   }
   return (
     <li
-      className={`list-item ${isCollapsed ? "collapsed" : ""} ${
+      className={`list-item  ${isCollapsed ? "collapsed" : ""} ${
         isActive ? "active" : ""
       } ${isClicked ? "clicked" : ""}`}
       ref={optionRef}
@@ -36,8 +37,10 @@ function ListItem({
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
     >
-      <FontAwesomeIcon icon="fa-regular fa-file" />
-      {listItem}
+      <FontAwesomeIcon className="item-icon" icon="fa-regular fa-file" />
+      <span className={`item-title ${isCollapsed ? "collapsed" : ""}`}>
+        {listItem}
+      </span>
     </li>
   );
 }
