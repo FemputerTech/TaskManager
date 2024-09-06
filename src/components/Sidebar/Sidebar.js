@@ -29,7 +29,7 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
   };
 
   const addListItem = () => {
-    const newListItem = `Untitled list ${listItems.length + 1}`;
+    const newListItem = "Untitled";
     setListItems([...listItems, newListItem]);
   };
 
