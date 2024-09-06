@@ -6,11 +6,23 @@ import "./App.css";
 
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [activeList, setActiveList] = useState("");
-  const [updateTitle, setUpdateTitle] = useState(activeList.title || "");
+  const [listItems, setListItems] = useState([]);
+  const [activeListIndex, setActiveListIndex] = useState(null);
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
+  };
+
+  const addListItem = () => {
+    const newListItem = { title: "Untitled" };
+    setListItems([...listItems, newListItem]);
+    setActiveListIndex(listItems.length);
+  };
+
+  const updateListTitle = (index, newTitle) => {
+    const updatedListItems = [...listItems];
+    updatedListItems[index] = { ...updatedListItems[index], title: newTitle };
+    setListItems(updatedListItems);
   };
 
   return (
@@ -25,14 +37,17 @@ function App() {
       <Sidebar
         isCollapsed={isSidebarCollapsed}
         toggleSidebar={toggleSidebar}
-        setActiveList={setActiveList}
-        activeList={activeList}
+        listItems={listItems}
+        setActiveListIndex={setActiveListIndex}
+        activeListIndex={activeListIndex}
+        addListItem={addListItem}
       />
       <main>
         <Dashboard
-          list={activeList}
-          updateTitle={updateTitle}
-          setUpdateTitle={setUpdateTitle}
+          list={activeListIndex !== null ? listItems[activeListIndex] : null}
+          updateListTitle={(newTitle) =>
+            updateListTitle(activeListIndex, newTitle)
+          }
         />
       </main>
     </div>

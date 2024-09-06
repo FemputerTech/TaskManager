@@ -5,26 +5,24 @@ import List from "./List";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../styles/Sidebar/Sidebar.css";
 
-function Sidebar({ isCollapsed, toggleSidebar, setActiveList }) {
-  const [listItems, setListItems] = useState([]);
-  const [activeListIndex, setActiveListIndex] = useState(null);
+function Sidebar({
+  isCollapsed,
+  toggleSidebar,
+  listItems,
+  setActiveListIndex,
+  activeListIndex,
+  addListItem,
+}) {
   const [clickedListIndex, setClickedListIndex] = useState(null);
 
   const handleItemClick = (type, index) => {
     if (type === "click") {
       setActiveListIndex(index);
-      setActiveList(listItems[index]);
     } else if (type === "mousedown") {
       setClickedListIndex(index);
     } else {
       setClickedListIndex(null);
     }
-  };
-
-  const addListItem = () => {
-    const newListItem = { title: "Untitled" };
-    setListItems([...listItems, newListItem]);
-    setActiveList(newListItem);
   };
   return (
     <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
