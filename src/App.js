@@ -29,7 +29,11 @@ function App() {
         activeList={activeList}
       />
       <main>
-        <Dashboard updateTitle={updateTitle} setUpdateTitle={setUpdateTitle} />
+        <Dashboard
+          list={activeList}
+          updateTitle={updateTitle}
+          setUpdateTitle={setUpdateTitle}
+        />
       </main>
     </div>
   );
