@@ -1,8 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../../styles/Sidebar/List.css";
+import "../../styles/Sidebar/Workspace.css";
 
-function List({
+function Workspace({
   title,
   isActive,
   isClicked,
@@ -14,25 +14,25 @@ function List({
 }) {
   return (
     <li
-      className={`list-item  ${isCollapsed ? "collapsed" : ""} ${
+      className={`workspace  ${isCollapsed ? "collapsed" : ""} ${
         isActive ? "active" : ""
       } ${isClicked ? "clicked" : ""}`}
       onClick={onClick}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
     >
-      <div className="list-title-container">
+      <div className="workspace-title">
         <FontAwesomeIcon
           className="list-item-icon"
           icon="fa-regular fa-file"
           color="var(--text-faint)"
         />
-        <span className={`list-item-title ${isCollapsed ? "collapsed" : ""}`}>
+        <span className={`workspace-text ${isCollapsed ? "collapsed" : ""}`}>
           {title}
         </span>
       </div>
       <button
-        className={`list-delete ${isCollapsed ? "collapsed" : ""}`}
+        className={`workspace-delete ${isCollapsed ? "collapsed" : ""}`}
         onClick={onDelete}
       >
         <FontAwesomeIcon
@@ -44,4 +44,4 @@ function List({
   );
 }
 
-export default List;
+export default Workspace;

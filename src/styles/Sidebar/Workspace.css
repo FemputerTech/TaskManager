@@ -1,5 +1,5 @@
 /* ****************** List Item ****************** */
-.list-item {
+.workspace {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,35 +9,35 @@
   margin: 2px;
 }
 
-.list-item.collapsed {
+.workspace.collapsed {
   justify-content: center;
 }
 
-.list-item.active,
-.list-item:hover {
+.workspace.active,
+.workspace:hover {
   background-color: var(--neutral-1);
 }
 
-.list-item.active:hover {
+.workspace.active:hover {
   background-color: var(--neutral-2);
 }
 
-.list-item.active.clicked,
-.list-item.clicked {
+.workspace.active.clicked,
+.workspace.clicked {
   background-color: var(--neutral-4);
 }
 
-.list-title-container {
+.workspace-title {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.list-item-title.collapsed {
+.workspace-text.collapsed {
   display: none;
 }
 
-.list-delete {
+.workspace-delete {
   background-color: transparent;
   border-radius: 5px;
   border: none;
@@ -45,10 +45,10 @@
   padding: 4px;
 }
 
-.list-delete:hover {
+.workspace-delete:hover {
   background-color: var(--neutral-3);
 }
 
-.list-delete.collapsed {
+.workspace-delete.collapsed {
   display: none;
 }

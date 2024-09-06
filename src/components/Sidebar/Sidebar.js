@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SidebarHeader from "./SidebarHeader";
 import SectionHeader from "./SectionHeader";
-import List from "./List";
+import Workspace from "./Workspace";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../styles/Sidebar/Sidebar.css";
 
@@ -55,7 +55,7 @@ function Sidebar({
         />
         <ul className="lists">
           {listItems.map((listItem, index) => (
-            <List
+            <Workspace
               key={index}
               title={listItem.title}
               isActive={index === activeListIndex}
