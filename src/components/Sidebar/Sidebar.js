@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import SidebarHeader from "./SidebarHeader";
 import SectionHeader from "./SectionHeader";
 import List from "./List";
@@ -9,7 +9,6 @@ function Sidebar({ isCollapsed, toggleSidebar, setActiveList }) {
   const [listItems, setListItems] = useState([]);
   const [activeListIndex, setActiveListIndex] = useState(null);
   const [clickedListIndex, setClickedListIndex] = useState(null);
-  const optionRef = useRef(null);
 
   const handleItemClick = (type, index) => {
     if (type === "click") {
@@ -54,7 +53,6 @@ function Sidebar({ isCollapsed, toggleSidebar, setActiveList }) {
               onMouseDown={(event) => handleItemClick(event.type, index)}
               onMouseUp={(event) => handleItemClick(event.type, index)}
               isCollapsed={isCollapsed}
-              optionRef={optionRef}
             />
           ))}
         </ul>

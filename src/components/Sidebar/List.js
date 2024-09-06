@@ -10,14 +10,12 @@ function List({
   onMouseDown,
   onMouseUp,
   isCollapsed,
-  optionRef,
 }) {
   return (
     <li
       className={`list-item  ${isCollapsed ? "collapsed" : ""} ${
         isActive ? "active" : ""
       } ${isClicked ? "clicked" : ""}`}
-      ref={optionRef}
       onClick={onClick}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
