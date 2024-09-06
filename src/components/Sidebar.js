@@ -70,7 +70,7 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
           </span>
         </div>
       </section>
-      <section className="lists">
+      <section className="private">
         <div className="section-title">
           <FontAwesomeIcon
             icon="fa-solid fa-list-ul"
