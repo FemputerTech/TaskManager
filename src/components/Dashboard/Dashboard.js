@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "../../styles/Dashboard/Dashboard.css";
 
-function Dashboard({ list }) {
-  const [updateTitle, setUpdateTitle] = useState(list.title);
-
+function Dashboard({ updateTitle, setUpdateTitle }) {
   const handleOnChange = (event) => {
     setUpdateTitle(event.target.value);
   };

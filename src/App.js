@@ -7,6 +7,7 @@ import "./App.css";
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeList, setActiveList] = useState("");
+  const [updateTitle, setUpdateTitle] = useState(activeList.title || "");
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
@@ -28,7 +29,7 @@ function App() {
         activeList={activeList}
       />
       <main>
-        <Dashboard list={activeList} />
+        <Dashboard updateTitle={updateTitle} setUpdateTitle={setUpdateTitle} />
       </main>
     </div>
   );
