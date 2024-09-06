@@ -2,6 +2,30 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faNoteSticky,
+  faAnglesLeft,
+  faAnglesRight,
+  faPlus,
+  faListUl,
+  faPenToSquare,
+  faStar as faStarSolid,
+  faTrashCan,
+} from "@fortawesome/free-solid-svg-icons";
+import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
+
+library.add(
+  faNoteSticky,
+  faAnglesLeft,
+  faAnglesRight,
+  faPlus,
+  faListUl,
+  faPenToSquare,
+  faStarSolid,
+  faStarRegular,
+  faTrashCan
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);

@@ -1,4 +1,5 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../styles/ContextMenu.css";
 
 const ContextMenu = ({
@@ -25,7 +26,11 @@ const ContextMenu = ({
         return (
           <button className="option" onClick={handleClick} key={index}>
             <span>{option.text}</span>
-            <box-icon name={option.icon} type="solid"></box-icon>
+            <FontAwesomeIcon
+              icon={option.icon}
+              color="var(--text-faint)"
+              size="lg"
+            />
           </button>
         );
       })}

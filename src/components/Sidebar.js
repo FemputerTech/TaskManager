@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import ContextMenu from "./ContextMenu";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../styles/Sidebar.css";
 
 function Sidebar({ isCollapsed, toggleSidebar }) {
@@ -34,7 +35,12 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
     <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
       <div className={`sidebar-header ${isCollapsed ? "collapsed" : ""}`}>
         <div className="logo">
-          <box-icon className="logo-icon" name="note"></box-icon>
+          <FontAwesomeIcon
+            className="logo-icon"
+            icon="fa-solid fa-note-sticky"
+            color="var(--text-normal)"
+            size="2x"
+          />
           <span className={`logo-text ${isCollapsed ? "collapsed" : ""}`}>
             ToDo
           </span>
@@ -44,16 +50,35 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
           onClick={toggleSidebar}
           aria-label="collapse sidebar"
         >
-          <box-icon
-            name={isCollapsed ? "chevrons-right" : "chevrons-left"}
-          ></box-icon>
+          <FontAwesomeIcon
+            icon={`fa-solid ${
+              isCollapsed ? "fa-angles-right" : "fa-angles-left"
+            }`}
+            color="var(--text-faint)"
+          />
         </button>
       </div>
+      <section className="favorites">
+        <div className="section-title">
+          <FontAwesomeIcon
+            icon="fa-regular fa-star"
+            color="var(--text-faint)"
+            size="xs"
+          />
+          <span className={`section-text ${isCollapsed ? "collapsed" : ""}`}>
+            Favorites
+          </span>
+        </div>
+      </section>
       <section className="lists">
         <div className="section-title">
-          <box-icon color="gray" name="list-ul" size="xs"></box-icon>
+          <FontAwesomeIcon
+            icon="fa-solid fa-list-ul"
+            color="var(--text-faint)"
+            size="xs"
+          />
           <span className={`section-text ${isCollapsed ? "collapsed" : ""}`}>
-            Lists
+            Private
           </span>
         </div>
         <ul className="section-list">
@@ -65,7 +90,6 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
                 onContextMenu={(event) => handleOnContextMenu(event, listItem)}
                 key={index}
               >
-                <box-icon color="gray" name="grid-vertical"></box-icon>
                 {listItem}
               </li>
             );
@@ -75,7 +99,7 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
           className={`new-item-button ${isCollapsed ? "collapsed" : ""}`}
           onClick={addListItem}
         >
-          <box-icon name="plus"></box-icon>
+          <FontAwesomeIcon icon="fa-solid fa-plus" color="var(--text-normal)" />
           <span className={`button-text ${isCollapsed ? "collapsed" : ""}`}>
             Create new list
           </span>
@@ -86,25 +110,22 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
           positionY={contextMenu.position.y}
           options={[
             {
-              text: "Delete",
-              icon: "message-square-x",
-              onClick: () => alert("delete"),
+              text: "Favorite",
+              icon: "fa-solid fa-star",
+              onClick: () => alert("rename"),
             },
             {
               text: "Rename",
-              icon: "message-square-edit",
+              icon: "fa-solid fa-pen-to-square",
               onClick: () => alert("rename"),
+            },
+            {
+              text: "Delete",
+              icon: "fa-solid fa-trash-can",
+              onClick: () => alert("delete"),
             },
           ]}
         />
-      </section>
-      <section className="settings">
-        <div className="section-title">
-          <box-icon color="gray" name="cog" type="regular" size="xs"></box-icon>
-          <span className={`section-text ${isCollapsed ? "collapsed" : ""}`}>
-            Settings
-          </span>
-        </div>
       </section>
     </div>
   );
