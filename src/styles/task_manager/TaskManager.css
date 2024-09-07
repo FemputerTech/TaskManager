@@ -8,3 +8,11 @@
 .task-manager-title:focus {
   outline: none;
 }
+
+.today {
+  display: flex;
+  color: var(--text-faint);
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 10px;
+}
