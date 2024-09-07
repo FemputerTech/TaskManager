@@ -35,6 +35,7 @@ function TaskManager({
             onChange={handleOnChange}
             placeholder="Untitled"
           />
+          <span className="today">Today's Date placeholder</span>
           <TaskList tasks={workspace.tasks} onAddTask={handleAddTask} />
         </>
       ) : (

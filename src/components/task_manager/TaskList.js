@@ -1,11 +1,14 @@
 import React from "react";
 import Task from "../Task";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../../styles/task_manager/TaskList.css";
 
 export default function TaskList({ tasks = [], onAddTask }) {
   return (
     <div className="task-list">
       <button className="new-task-button" onClick={onAddTask}>
-        <span className="button-text">Add new task</span>
+        <FontAwesomeIcon icon="fa-solid fa-plus" color="var(--text-normal)" />
+        <span className="button-text">New task</span>
       </button>
       <div className="tasks">
         {tasks.map((task) => (
