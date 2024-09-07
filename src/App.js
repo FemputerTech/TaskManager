@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Sidebar from "./components/Sidebar/Sidebar";
-import TaskManager from "./components/TaskManager/TaskManager";
+import Sidebar from "./components/sidebar/Sidebar";
+import TaskManager from "./components/task_manager/TaskManager";
 import { Helmet } from "react-helmet";
 import "./App.css";
 

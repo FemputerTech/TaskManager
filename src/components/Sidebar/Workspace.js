@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../../styles/Sidebar/Workspace.css";
+import "../../styles/sidebar/Workspace.css";
 
 function WorkSpace({
   title,

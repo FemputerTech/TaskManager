@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Task from "./Task";
-import "../../styles/TaskManager/TaskManager.css";
+import "../../styles/task_manager/TaskManager.css";
 
 function TaskManager({ workspace, updateWorkspaceTitle }) {
   const [tasks, setTasks] = useState([]);

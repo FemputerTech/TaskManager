@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../../styles/Sidebar/SectionHeader.css";
+import "../../styles/sidebar/SectionHeader.css";
 
 function SectionHeader({ text, icon, isCollapsed }) {
   return (

@@ -3,7 +3,7 @@ import SidebarHeader from "./SidebarHeader";
 import SectionHeader from "./SectionHeader";
 import Workspace from "./Workspace";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../../styles/Sidebar/Sidebar.css";
+import "../../styles/sidebar/Sidebar.css";
 
 function Sidebar({
   isCollapsed,

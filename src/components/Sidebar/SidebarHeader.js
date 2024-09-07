@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../../styles/Sidebar/SidebarHeader.css";
+import "../../styles/sidebar/SidebarHeader.css";
 
 function SidebarHeader({ isCollapsed, toggleSidebar }) {
   return (
