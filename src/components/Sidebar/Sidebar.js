@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SidebarHeader from "./SidebarHeader";
 import SectionHeader from "./SectionHeader";
-import Workspace from "./Workspace";
+import Workspace from "../Workspace";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../styles/sidebar/Sidebar.css";
 

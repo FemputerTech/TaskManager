@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Task from "./Task";
+import Task from "../Task";
 import "../../styles/task_manager/TaskManager.css";
 
 function TaskManager({ workspace, updateWorkspaceTitle }) {
