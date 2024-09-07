@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import TaskList from "./TaskList";
 import "../../styles/task_manager/TaskManager.css";
 
@@ -9,6 +9,19 @@ function TaskManager({
 }) {
   const handleOnChange = (event) => {
     updateWorkspaceTitle(event.target.value);
+  };
+
+  const handleAddTask = () => {
+    if (workspace) {
+      const tasks = workspace.tasks || [];
+      const newTask = {
+        id: tasks.length,
+        title: "Untitled",
+        workspaceId: workspace.id,
+      };
+      const updatedTasks = [...tasks, newTask];
+      updateWorkspaceTasks(updatedTasks);
+    }
   };
 
   return (
@@ -22,7 +35,7 @@ function TaskManager({
             onChange={handleOnChange}
             placeholder="Untitled"
           />
-          <TaskList workspaceId={workspace.id} />
+          <TaskList tasks={workspace.tasks} onAddTask={handleAddTask} />
         </>
       ) : (
         <p>Select a workspace from the sidebar or create a new one</p>
