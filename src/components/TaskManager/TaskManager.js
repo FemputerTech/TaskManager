@@ -27,7 +27,7 @@ function TaskManager({ workspace, updateWorkspaceTitle }) {
           </button>
           <ul className="tasks">
             {tasks.map((task, index) => (
-              <Task />
+              <Task key={index} />
             ))}
           </ul>
         </>
