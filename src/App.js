@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "./components/sidebar/Sidebar";
+import Sidebar from "./components/sidebars/Sidebar";
 import TaskManager from "./components/task_manager/TaskManager";
 import { Helmet } from "react-helmet";
 import "./App.css";
@@ -8,10 +8,6 @@ function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [workspaces, setWorkspaces] = useState([]);
   const [activeWorkspaceIndex, setActiveWorkspaceIndex] = useState(null);
-
-  const toggleSidebar = () => {
-    setIsSidebarCollapsed(!isSidebarCollapsed);
-  };
 
   const addWorkspace = () => {
     const newWorkspace = { title: "Untitled" };
@@ -36,7 +32,7 @@ function App() {
       <header>{/* Header Content */}</header>
       <Sidebar
         isCollapsed={isSidebarCollapsed}
-        toggleSidebar={toggleSidebar}
+        setIsCollapsed={setIsSidebarCollapsed}
         workspaces={workspaces}
         setWorkspaces={setWorkspaces}
         activeWorkspaceIndex={activeWorkspaceIndex}

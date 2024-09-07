@@ -7,7 +7,7 @@ import "../../styles/sidebar/Sidebar.css";
 
 function Sidebar({
   isCollapsed,
-  toggleSidebar,
+  setIsCollapsed,
   workspaces,
   setWorkspaces,
   activeWorkspaceIndex,
@@ -15,6 +15,10 @@ function Sidebar({
   addWorkspace,
 }) {
   const [clickedWorkspaceIndex, setClickedWorkspaceIndex] = useState(null);
+
+  const toggle = () => {
+    setIsCollapsed(!isCollapsed);
+  };
 
   const handleItemClick = (type, index) => {
     if (type === "click") {
@@ -39,7 +43,7 @@ function Sidebar({
 
   return (
     <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
-      <SidebarHeader isCollapsed={isCollapsed} toggleSidebar={toggleSidebar} />
+      <SidebarHeader isCollapsed={isCollapsed} toggleSidebar={toggle} />
       <section className="favorites">
         <SectionHeader
           text="Favorites"
