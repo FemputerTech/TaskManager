@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "./components/sidebars/Sidebar";
+import Sidebar from "./components/sidebar/Sidebar";
 import TaskManager from "./components/task_manager/TaskManager";
 import { Helmet } from "react-helmet";
 import "./App.css";
