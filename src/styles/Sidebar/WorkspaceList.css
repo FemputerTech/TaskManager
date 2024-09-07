@@ -1,0 +1,31 @@
+/* ****************** Workspace List ****************** */
+.workspaces {
+  list-style-type: none;
+}
+
+.new-workspace-button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 10px;
+  color: var(--text-normal);
+  cursor: pointer;
+  font-size: var(--font-size);
+  padding: 10px;
+  margin: 2px;
+  width: 100%;
+  gap: 10px;
+}
+
+.new-workspace-button.collapsed {
+  justify-content: center;
+}
+
+.new-workspace-button:hover {
+  background-color: var(--neutral-1);
+}
+
+.button-text.collapsed {
+  display: none;
+}

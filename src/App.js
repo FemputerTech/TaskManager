@@ -9,15 +9,15 @@ function App() {
   const [workspaces, setWorkspaces] = useState([]);
   const [activeWorkspaceIndex, setActiveWorkspaceIndex] = useState(null);
 
-  const addWorkspace = () => {
-    const newWorkspace = { title: "Untitled" };
-    setWorkspaces([...workspaces, newWorkspace]);
-    setActiveWorkspaceIndex(workspaces.length);
-  };
-
   const updateWorkspaceTitle = (index, newTitle) => {
     const updatedWorkspaces = [...workspaces];
     updatedWorkspaces[index] = { ...updatedWorkspaces[index], title: newTitle };
+    setWorkspaces(updatedWorkspaces);
+  };
+
+  const updateWorkspaceTasks = (index, tasks) => {
+    const updatedWorkspaces = [...workspaces];
+    updatedWorkspaces[index] = { ...updatedWorkspaces[index], tasks: tasks };
     setWorkspaces(updatedWorkspaces);
   };
 
@@ -37,7 +37,6 @@ function App() {
         setWorkspaces={setWorkspaces}
         activeWorkspaceIndex={activeWorkspaceIndex}
         setActiveWorkspaceIndex={setActiveWorkspaceIndex}
-        addWorkspace={addWorkspace}
       />
       <main>
         <TaskManager
@@ -48,6 +47,9 @@ function App() {
           }
           updateWorkspaceTitle={(newTitle) =>
             updateWorkspaceTitle(activeWorkspaceIndex, newTitle)
+          }
+          updateWorkspaceTasks={(tasks) =>
+            updateWorkspaceTasks(activeWorkspaceIndex, tasks)
           }
         />
       </main>

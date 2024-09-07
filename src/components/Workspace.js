@@ -4,16 +4,17 @@ import "../styles/Workspace.css";
 
 function WorkSpace({
   title,
+  onDelete,
   isActive,
   isClicked,
   onClick,
   onMouseDown,
   onMouseUp,
-  onDelete,
   isCollapsed,
+  tasks,
 }) {
   return (
-    <li
+    <div
       className={`workspace  ${isCollapsed ? "collapsed" : ""} ${
         isActive ? "active" : ""
       } ${isClicked ? "clicked" : ""}`}
@@ -40,7 +41,7 @@ function WorkSpace({
           color="var(--text-faint)"
         />
       </button>
-    </li>
+    </div>
   );
 }
 

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import SidebarHeader from "./SidebarHeader";
 import SectionHeader from "./SectionHeader";
-import Workspace from "../Workspace";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import WorkspaceList from "./WorkspaceList";
 import "../../styles/sidebar/Sidebar.css";
 
 function Sidebar({
@@ -12,33 +11,9 @@ function Sidebar({
   setWorkspaces,
   activeWorkspaceIndex,
   setActiveWorkspaceIndex,
-  addWorkspace,
 }) {
-  const [clickedWorkspaceIndex, setClickedWorkspaceIndex] = useState(null);
-
   const toggle = () => {
     setIsCollapsed(!isCollapsed);
-  };
-
-  const handleItemClick = (type, index) => {
-    if (type === "click") {
-      setActiveWorkspaceIndex(index);
-    } else if (type === "mousedown") {
-      setClickedWorkspaceIndex(index);
-    } else {
-      setClickedWorkspaceIndex(null);
-    }
-  };
-
-  const handleItemDelete = (index) => (event) => {
-    event.stopPropagation();
-    const newWorkspaces = workspaces.filter((_, i) => i !== index);
-    setWorkspaces(newWorkspaces);
-    if (activeWorkspaceIndex === index) {
-      setActiveWorkspaceIndex(null);
-    } else if (activeWorkspaceIndex > index) {
-      setActiveWorkspaceIndex(activeWorkspaceIndex - 1);
-    }
   };
 
   return (
@@ -57,30 +32,13 @@ function Sidebar({
           icon="fa-solid fa-list-ul"
           isCollapsed={isCollapsed}
         />
-        <ul className="workspaces">
-          {workspaces.map((workspace, index) => (
-            <Workspace
-              key={index}
-              title={workspace.title}
-              isActive={index === activeWorkspaceIndex}
-              isClicked={index === clickedWorkspaceIndex}
-              onClick={(event) => handleItemClick(event.type, index)}
-              onMouseDown={(event) => handleItemClick(event.type, index)}
-              onMouseUp={(event) => handleItemClick(event.type, index)}
-              onDelete={handleItemDelete(index)}
-              isCollapsed={isCollapsed}
-            />
-          ))}
-        </ul>
-        <button
-          className={`new-workspace-button ${isCollapsed ? "collapsed" : ""}`}
-          onClick={addWorkspace}
-        >
-          <FontAwesomeIcon icon="fa-solid fa-plus" color="var(--text-normal)" />
-          <span className={`button-text ${isCollapsed ? "collapsed" : ""}`}>
-            Add new workspace
-          </span>
-        </button>
+        <WorkspaceList
+          isCollapsed={isCollapsed}
+          workspaces={workspaces}
+          setWorkspaces={setWorkspaces}
+          activeWorkspaceIndex={activeWorkspaceIndex}
+          setActiveWorkspaceIndex={setActiveWorkspaceIndex}
+        />
       </section>
     </div>
   );
