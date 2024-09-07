@@ -58,7 +58,7 @@ function WorkspaceList({
       >
         <FontAwesomeIcon icon="fa-solid fa-plus" color="var(--text-normal)" />
         <span className={`button-text ${isCollapsed ? "collapsed" : ""}`}>
-          Add new workspace
+          New workspace
         </span>
       </button>
     </div>
