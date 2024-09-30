@@ -11,7 +11,7 @@ class Task {
 class Project {
   constructor(id) {
     this.id = id;
-    this.title = "New Title";
+    this.title = `New Title ${this.id}`;
     this.category = "private";
     this.tasks = [];
   }
@@ -24,6 +24,16 @@ class Project {
     `;
     projectListDiv.appendChild(projectDiv);
     console.log(projectListDiv);
+
+    projectDiv.addEventListener("click", () => this.display());
+  }
+  delete() {
+    console.log("deleting");
+  }
+
+  display() {
+    const projectId = document.querySelector(".project-id");
+    projectId.textContent = `${this.title}`;
   }
 }
 
