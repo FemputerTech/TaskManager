@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  width: 100vw;
+  height: 100vh;
+}
+
+.sidebar {
+  background-color: lightgray;
+  padding: 20px;
+  height: 100%;
+}
