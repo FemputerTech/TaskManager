@@ -66,7 +66,7 @@ export class Project {
 
       projectId.textContent = `${this.title}`;
 
-      if (addTaskButton === null) {
+      if (!addTaskButton) {
         addTaskButton = document.createElement("button");
         addTaskButton.id = "add-task";
         addTaskButton.type = "button";

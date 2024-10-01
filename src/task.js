@@ -39,7 +39,7 @@ export class Task {
     const taskDiv = document.createElement("div");
     taskDiv.className = "task";
     taskDiv.innerHTML = `
-        <p>${this.projectId}</p>
+        <p>${this.id}</p>
         <p>${this.name}</p>
         <p>${this.description}</p>
         <p>${this.dueDate}</p>
