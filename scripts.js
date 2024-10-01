@@ -1,10 +1,26 @@
 class Task {
-  constructor() {
+  constructor(id) {
+    this.id = id;
     this.name = "";
     this.description = "";
     this.dueDate = "";
     this.priority = "";
     this.status = "To Do"; // to do, in progress, completed, on hold
+  }
+
+  add() {
+    const taskListDiv = document.querySelector(".task-list");
+    const taskDiv = document.createElement("div");
+    taskDiv.className = "task";
+    taskDiv.innerHTML = `
+        <p>${this.id}</p>
+        <p>${this.name}</p>
+        <p>${this.description}</p>
+        <p>${this.dueDate}</p>
+        <p>${this.priority}</p>
+        <p>${this.status}</p>
+    `;
+    taskListDiv.appendChild(taskDiv);
   }
 }
 
@@ -24,8 +40,6 @@ class Project {
         <p>${this.title}</p>
     `;
     projectListDiv.appendChild(projectDiv);
-    console.log(projectListDiv);
-
     projectDiv.addEventListener("click", () => this.display());
   }
 
@@ -36,24 +50,20 @@ class Project {
   display() {
     const projectId = document.querySelector(".project-id");
     const taskContent = document.querySelector(".task-content");
-    const addTaskButton = document.createElement("button");
+
     projectId.textContent = `${this.title}`;
     taskContent.innerHTML = "";
-    addTaskButton.id = "add-task";
-    addTaskButton.type = "button";
-    addTaskButton.textContent = "Add Task";
+    taskContent.innerHTML = `
+        <button id="add-task" type="button">Add Task</button>
+        <div class="task-list"></div>
+    `;
 
-    taskContent.appendChild(addTaskButton);
-
-    for (let i = 0; i < this.tasks.length; i++) {
-      console.log("task:", this.tasks[i]);
-    }
-
-    console.log(taskContent);
-
-    addTaskButton.addEventListener("click", () =>
-      console.log("clicked:", this.id)
-    );
+    document.getElementById("add-task").addEventListener("click", () => {
+      const taskId = this.tasks.length + 1;
+      const newTask = new Task(taskId);
+      newTask.add();
+      this.tasks.push(newTask);
+    });
   }
 }
 
