@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 // import { getAuth } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { Project } from "./project.js";
 
 // The Firebase configuration object is perfectly safe to include on the client side.
@@ -15,17 +15,37 @@ const firebaseConfig = {
   measurementId: "G-2SJFBR3SH7",
 };
 
-console.log("Firebase! It's aliiiiiiiiive");
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
+console.log("Firebase! It's aliiiiiiiiive");
+
 // const auth = getAuth(firebaseApp);
+
 const db = getFirestore(firebaseApp);
 
-const projects = [];
+const projectsCollection = collection(db, "projects");
 
-document.getElementById("add-project").addEventListener("click", () => {
-  const projectId = projects.length + 1;
-  const newProject = new Project(projectId);
-  newProject.add();
-  projects.push(newProject);
+// Load projects from Firestore
+async function loadProjects() {
+  try {
+    const mySnapshot = await getDocs(projectsCollection);
+    mySnapshot.forEach((doc) => {
+      const projectData = doc.data();
+      const project = new Project(
+        doc.id,
+        projectData.title,
+        projectData.category
+      );
+      project.render();
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+loadProjects();
+
+document.getElementById("add-project").addEventListener("click", async () => {
+  const newProject = new Project();
+  await newProject.add(projectsCollection);
 });
