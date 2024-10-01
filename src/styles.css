@@ -57,12 +57,21 @@ body {
   cursor: pointer;
   font-size: var(--font-size);
   padding: 10px;
-  /* margin: 2px; */
   width: 100%;
 }
 
+.project.active,
 .project:hover {
   background-color: var(--neutral-1);
+}
+
+.project.active:hover {
+  background-color: var(--neutral-2);
+}
+
+.project.active.clicked,
+.project.clicked {
+  background-color: var(--neutral-4);
 }
 
 /* ****************** Main ****************** */

@@ -52,6 +52,16 @@ export class Project {
     console.log("deleting");
   }
 
+  active(projectDiv) {
+    const projectListDiv = document.querySelectorAll(".project");
+    projectListDiv.forEach((project) => {
+      if (project.classList.contains("active")) {
+        project.classList.remove("active");
+      }
+    });
+    projectDiv.classList.add("active");
+  }
+
   render() {
     const projectListDiv = document.querySelector(".project-list");
     const projectDiv = document.createElement("div");
@@ -59,7 +69,13 @@ export class Project {
     projectDiv.innerHTML = `<p>${this.title}</p>`;
     projectListDiv.appendChild(projectDiv);
 
+    projectDiv.addEventListener("mousedown", () => {
+      projectDiv.classList.add("clicked");
+    });
+
     projectDiv.addEventListener("click", async () => {
+      projectDiv.classList.remove("clicked");
+      this.active(projectDiv);
       const projectId = document.querySelector(".project-id");
       const taskList = document.querySelector(".task-list");
       let addTaskButton = document.getElementById("add-task");
