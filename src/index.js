@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 // import { getAuth } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
 import { getFirestore } from "firebase/firestore";
+import { Project } from "./project.js";
 
 // The Firebase configuration object is perfectly safe to include on the client side.
 // You secure your Firebase projects by using security rules and App Check.
@@ -19,3 +20,12 @@ console.log("Firebase! It's aliiiiiiiiive");
 const firebaseApp = initializeApp(firebaseConfig);
 // const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
+
+const projects = [];
+
+document.getElementById("add-project").addEventListener("click", () => {
+  const projectId = projects.length + 1;
+  const newProject = new Project(projectId);
+  newProject.add();
+  projects.push(newProject);
+});
