@@ -1,44 +1,63 @@
+import { addDoc, doc, collection } from "firebase/firestore";
 import { Task } from "./task.js";
 
 export class Project {
-  constructor(id) {
+  constructor(id = null, title = "New Title", category = "private") {
     this.id = id;
-    this.title = `New Title ${this.id}`;
-    this.category = "private";
+    this.title = title;
+    this.category = category;
     this.tasks = [];
   }
 
-  add() {
-    const projectListDiv = document.querySelector(".project-list");
-    const projectDiv = document.createElement("div");
-    projectDiv.className = "project";
-    projectDiv.innerHTML = `
-          <p>${this.title}</p>
-      `;
-    projectListDiv.appendChild(projectDiv);
-    projectDiv.addEventListener("click", () => this.display());
+  async add(projectsCollection) {
+    try {
+      const newDoc = await addDoc(projectsCollection, {
+        title: this.title,
+        category: this.category,
+      });
+      this.id = newDoc.id;
+
+      const projectDocRef = doc(projectsCollection, this.id);
+      const tasksCollection = collection(projectDocRef, "tasksCollection");
+
+      this.render();
+      console.log(`Your project ${this.id} was created.`);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   delete() {
     console.log("deleting");
   }
 
-  display() {
-    const projectId = document.querySelector(".project-id");
-    const taskContent = document.querySelector(".task-content");
+  render() {
+    const projectListDiv = document.querySelector(".project-list");
+    const projectDiv = document.createElement("div");
+    projectDiv.className = "project";
+    projectDiv.innerHTML = `<p>${this.title}</p>`;
+    projectListDiv.appendChild(projectDiv);
 
-    projectId.textContent = `${this.title}`;
-    taskContent.innerHTML = "";
-    taskContent.innerHTML = `
-          <button id="add-task" type="button">Add Task</button>
-          <div class="task-list"></div>
-      `;
+    projectDiv.addEventListener("click", () => {
+      const projectId = document.querySelector(".project-id");
+      const taskContent = document.querySelector(".task-content");
 
-    document.getElementById("add-task").addEventListener("click", () => {
-      const taskId = this.tasks.length + 1;
-      const newTask = new Task(taskId);
-      newTask.add();
-      this.tasks.push(newTask);
+      projectId.textContent = `${this.title}`;
+
+      // clear previous tasks
+      taskContent.innerHTML = "";
+
+      taskContent.innerHTML = `
+            <button id="add-task" type="button">Add Task</button>
+            <div class="task-list"></div>
+        `;
+
+      document.getElementById("add-task").addEventListener("click", () => {
+        const taskId = this.tasks.length + 1;
+        const newTask = new Task(taskId);
+        newTask.add();
+        this.tasks.push(newTask);
+      });
     });
   }
 }
