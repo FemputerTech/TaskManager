@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-// import { getAuth } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { Project } from "./project.js";
 
@@ -19,8 +18,6 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 console.log("Firebase! It's aliiiiiiiiive");
 
-// const auth = getAuth(firebaseApp);
-
 const db = getFirestore(firebaseApp);
 
 const projectsCollection = collection(db, "projects");
@@ -29,9 +26,10 @@ const projectsCollection = collection(db, "projects");
 async function loadProjects() {
   try {
     const projectSnapshot = await getDocs(projectsCollection);
-    projectSnapshot.forEach((doc) => {
+    projectSnapshot.forEach(async (doc) => {
       const projectData = doc.data();
       const project = new Project(
+        db,
         doc.id,
         projectData.title,
         projectData.category
@@ -39,13 +37,13 @@ async function loadProjects() {
       project.render();
     });
   } catch (error) {
-    console.log(error);
+    console.log("Error loading projects: ", error);
   }
 }
 
 loadProjects();
 
 document.getElementById("add-project").addEventListener("click", async () => {
-  const newProject = new Project();
-  await newProject.add(projectsCollection);
+  const newProject = new Project(db);
+  await newProject.add();
 });
