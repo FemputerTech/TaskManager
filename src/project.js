@@ -5,6 +5,7 @@ export class Project {
   constructor(db, id = null, title = "New Title", category = "private") {
     this.db = db;
     this.id = id;
+    this.icon = "fa-regular fa-file";
     this.title = title;
     this.category = category;
     this.tasks = [];
@@ -66,7 +67,10 @@ export class Project {
     const projectListDiv = document.querySelector(".project-list");
     const projectDiv = document.createElement("div");
     projectDiv.className = "project";
-    projectDiv.innerHTML = `<p>${this.title}</p>`;
+    projectDiv.innerHTML = `
+      <i class="${this.icon}"></i>
+      <p>${this.title}</p>
+    `;
     projectListDiv.appendChild(projectDiv);
 
     projectDiv.addEventListener("mousedown", () => {
