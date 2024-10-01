@@ -1,16 +1,42 @@
-import { addDoc, getDocs, collection } from "firebase/firestore";
+import { addDoc, getDocs, collection, doc } from "firebase/firestore";
 import { Task } from "./task.js";
 
 export class Project {
-  constructor(id = null, title = "New Title", category = "private") {
+  constructor(db, id = null, title = "New Title", category = "private") {
+    this.db = db;
     this.id = id;
     this.title = title;
     this.category = category;
     this.tasks = [];
   }
 
-  async add(projectsCollection) {
+  async loadTasks() {
     try {
+      const tasksCollection = collection(this.db, "projects", this.id, "tasks");
+      const taskSnapshot = await getDocs(tasksCollection);
+      this.tasks = []; // Clear previous tasks to avoid duplicates
+      taskSnapshot.forEach((doc) => {
+        const taskData = doc.data();
+        const task = new Task(
+          doc.id,
+          this.id,
+          taskData.name,
+          taskData.description,
+          taskData.dueDate,
+          taskData.priority,
+          taskData.status
+        );
+        task.render();
+        this.tasks.push(task);
+      });
+    } catch (error) {
+      console.error("Error loading tasks: ", error);
+    }
+  }
+
+  async add() {
+    try {
+      const projectsCollection = collection(this.db, "projects");
       const newDoc = await addDoc(projectsCollection, {
         title: this.title,
         category: this.category,
@@ -33,25 +59,38 @@ export class Project {
     projectDiv.innerHTML = `<p>${this.title}</p>`;
     projectListDiv.appendChild(projectDiv);
 
-    projectDiv.addEventListener("click", () => {
+    projectDiv.addEventListener("click", async () => {
       const projectId = document.querySelector(".project-id");
-      const taskContent = document.querySelector(".task-content");
+      const taskList = document.querySelector(".task-list");
+      let addTaskButton = document.getElementById("add-task");
 
       projectId.textContent = `${this.title}`;
 
-      // clear previous tasks
-      taskContent.innerHTML = "";
+      if (addTaskButton === null) {
+        addTaskButton = document.createElement("button");
+        addTaskButton.id = "add-task";
+        addTaskButton.type = "button";
+        addTaskButton.textContent = "Add Task";
+        taskList.insertAdjacentElement("beforebegin", addTaskButton);
+      }
 
-      taskContent.innerHTML = `
-            <button id="add-task" type="button">Add Task</button>
-            <div class="task-list"></div>
-        `;
+      taskList.innerHTML = ""; //clear previous tasks
 
-      document.getElementById("add-task").addEventListener("click", () => {
-        const newTask = new Task(this.id);
-        newTask.add();
-        this.tasks.push(newTask);
-      });
+      await this.loadTasks();
+
+      document
+        .getElementById("add-task")
+        .addEventListener("click", async () => {
+          const tasksCollection = collection(
+            this.db,
+            "projects",
+            this.id,
+            "tasks"
+          );
+          const newTask = new Task(this.id);
+          await newTask.add(tasksCollection);
+          this.tasks.push(newTask);
+        });
     });
   }
 }
