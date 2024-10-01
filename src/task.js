@@ -1,6 +1,7 @@
 export class Task {
-  constructor(id) {
-    this.id = id;
+  constructor(projectId) {
+    this.id = null;
+    this.projectId = projectId;
     this.name = "";
     this.description = "";
     this.dueDate = "";
@@ -13,7 +14,7 @@ export class Task {
     const taskDiv = document.createElement("div");
     taskDiv.className = "task";
     taskDiv.innerHTML = `
-        <p>${this.id}</p>
+        <p>${this.projectId}</p>
         <p>${this.name}</p>
         <p>${this.description}</p>
         <p>${this.dueDate}</p>
