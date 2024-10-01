@@ -28,8 +28,8 @@ const projectsCollection = collection(db, "projects");
 // Load projects from Firestore
 async function loadProjects() {
   try {
-    const mySnapshot = await getDocs(projectsCollection);
-    mySnapshot.forEach((doc) => {
+    const projectSnapshot = await getDocs(projectsCollection);
+    projectSnapshot.forEach((doc) => {
       const projectData = doc.data();
       const project = new Project(
         doc.id,

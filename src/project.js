@@ -1,4 +1,4 @@
-import { addDoc, doc, collection } from "firebase/firestore";
+import { addDoc, getDocs, collection } from "firebase/firestore";
 import { Task } from "./task.js";
 
 export class Project {
@@ -16,14 +16,9 @@ export class Project {
         category: this.category,
       });
       this.id = newDoc.id;
-
-      const projectDocRef = doc(projectsCollection, this.id);
-      const tasksCollection = collection(projectDocRef, "tasksCollection");
-
       this.render();
-      console.log(`Your project ${this.id} was created.`);
     } catch (error) {
-      console.log(error);
+      console.log("Error adding project:", error);
     }
   }
 
@@ -53,8 +48,7 @@ export class Project {
         `;
 
       document.getElementById("add-task").addEventListener("click", () => {
-        const taskId = this.tasks.length + 1;
-        const newTask = new Task(taskId);
+        const newTask = new Task(this.id);
         newTask.add();
         this.tasks.push(newTask);
       });
