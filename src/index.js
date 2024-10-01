@@ -1,6 +1,6 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+import { initializeApp } from "firebase/app";
 // import { getAuth } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+import { getFirestore } from "firebase/firestore";
 
 // The Firebase configuration object is perfectly safe to include on the client side.
 // You secure your Firebase projects by using security rules and App Check.
@@ -14,6 +14,7 @@ const firebaseConfig = {
   measurementId: "G-6X688LECJL",
 };
 
+console.log("Firebase! It's aliiiiiiiiive");
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 // const auth = getAuth(firebaseApp);
