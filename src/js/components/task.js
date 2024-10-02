@@ -1,5 +1,3 @@
-import { addDoc } from "firebase/firestore";
-
 export class Task {
   constructor(
     id,
@@ -28,7 +26,7 @@ export class Task {
   }
 
   render() {
-    const taskListDiv = document.querySelector(".task-list");
+    const taskListDiv = document.getElementById(`task-list-${this.projectId}`);
     const taskDiv = document.createElement("div");
     taskDiv.className = "task";
     taskDiv.innerHTML = `
