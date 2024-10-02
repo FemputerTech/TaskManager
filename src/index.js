@@ -66,7 +66,7 @@ loadProjects().then(() => {
   projects.forEach((project) => project.render());
 });
 
-document.querySelector("add-project").addEventListener("click", async () => {
+document.querySelector(".add-project").addEventListener("click", async () => {
   const projectRef = await addDocument("projects");
   const projectId = projects.length + 1;
   const newProject = new Project(projectRef, projectId);
