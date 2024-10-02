@@ -110,6 +110,8 @@ export class Project {
   rename(detailsDiv) {
     const projectTitleInput = document.getElementById(`project-${this.id}`);
     let displayTitle = detailsDiv.querySelector("h1");
+    let isUpdating = false;
+
     projectTitleInput.style.pointerEvents = "auto";
     projectTitleInput.removeAttribute("disabled");
     projectTitleInput.focus();
@@ -118,38 +120,53 @@ export class Project {
     projectTitleInput.setSelectionRange(0, length);
 
     projectTitleInput.addEventListener("input", () => {
-      displayTitle.textContent = projectTitleInput.value;
+      if (projectTitleInput.value.length === 0) {
+        displayTitle.textContent = "New Title";
+        displayTitle.style.color = "gray";
+      } else {
+        displayTitle.textContent = projectTitleInput.value;
+        displayTitle.style.color = "black";
+      }
     });
 
     const updateTitle = async () => {
       const newTitle = projectTitleInput.value.trim();
-      if (newTitle) {
-        const titleData = { title: newTitle };
-        this.title = newTitle;
-        try {
-          await updateDocument("projects", this.ref, titleData);
-        } catch (error) {
-          console.log("Error updating title:", error);
+      if (newTitle.length !== 0) {
+        if (newTitle !== this.title) {
+          const titleData = { title: newTitle };
+          this.title = newTitle;
+          try {
+            await updateDocument("projects", this.ref, titleData);
+          } catch (error) {
+            console.log("Error updating title:", error);
+          }
         }
-      }
-      projectTitleInput.style.pointerEvents = "none";
-      projectTitleInput.setAttribute("disabled", true);
-      projectTitleInput.blur();
+        projectTitleInput.style.pointerEvents = "none";
+        projectTitleInput.setAttribute("disabled", true);
+        projectTitleInput.blur();
 
-      // remove event listeners
-      window.removeEventListener("keydown", onKeydown);
-      projectTitleInput.removeEventListener("blur", onBlur);
+        // remove event listeners
+        window.removeEventListener("keydown", onKeydown);
+        projectTitleInput.removeEventListener("blur", onBlur);
+      } else {
+        // alert("Your project must have a title.");
+        throw new Error("The 'title' parameter cannot be blank.");
+      }
     };
 
     // Keydown event listener for Enter key
     const onKeydown = async (event) => {
       if (event.key === "Enter") {
+        console.log("Enter");
         await updateTitle();
       }
     };
 
     // Blur event listener for clicking outside the input
-    const onBlur = async () => await updateTitle();
+    const onBlur = async () => {
+      console.log("Clicked");
+      await updateTitle();
+    };
 
     window.addEventListener("keydown", onKeydown);
     projectTitleInput.addEventListener("blur", onBlur);
