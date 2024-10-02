@@ -2,6 +2,7 @@ import {
   getDocuments,
   getSubDocuments,
   addDocument,
+  updateDocument,
 } from "./js/firebase/firestore.js";
 import { Project } from "./js/components/project.js";
 import { Task } from "./js/components/task.js";
@@ -53,19 +54,20 @@ const loadProjects = async () => {
         tasks
       );
       projects.push(newProject);
-      newProject.render();
     });
     await Promise.all(projectPromises);
   } catch (error) {
-    console.error("Error loading projects:", errror);
+    console.error("Error loading projects:", error);
   }
 };
 
 // loadProjects().then(() => console.log(projects));
-loadProjects();
+loadProjects().then(() => {
+  projects.forEach((project) => project.render());
+});
 
-document.getElementById("add-project").addEventListener("click", async () => {
-  const projectRef = await addDocument("projects", newProjectData);
+document.querySelector("add-project").addEventListener("click", async () => {
+  const projectRef = await addDocument("projects");
   const projectId = projects.length + 1;
   const newProject = new Project(projectRef, projectId);
   const newProjectData = {
@@ -73,7 +75,7 @@ document.getElementById("add-project").addEventListener("click", async () => {
     category: newProject.category,
     icon: newProject.icon,
   };
-
+  await updateDocument("projects", projectRef, newProjectData);
   if (projectRef) {
     projects.push(newProject);
     newProject.render();
