@@ -58,7 +58,7 @@ export class Project {
     );
     projectDiv.addEventListener("click", () => {
       projectDiv.classList.remove("clicked");
-      this.active(detailsDiv);
+      this.active(detailsDiv, projectDiv);
     });
 
     document
@@ -90,13 +90,20 @@ export class Project {
       });
   }
 
-  active(detailsDiv) {
+  active(detailsDiv, projectDiv) {
+    const projectsList = document.querySelectorAll(".project");
+    projectsList.forEach((project) => {
+      if (project.classList.contains("active")) {
+        project.classList.remove("active");
+      }
+    });
     const detailsListDiv = document.querySelectorAll(".details");
     detailsListDiv.forEach((details) => {
       if (details.classList.contains("active")) {
         details.classList.remove("active");
       }
     });
+    projectDiv.classList.add("active");
     detailsDiv.classList.add("active");
   }
 
