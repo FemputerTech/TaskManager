@@ -82,4 +82,5 @@ body {
 .main {
   grid-column: 2;
   grid-row: 2;
+  padding: 0 100px;
 }
