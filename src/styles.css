@@ -52,12 +52,15 @@ body {
 }
 
 .project {
+  display: flex;
+  align-items: center;
   border-radius: 10px;
   color: var(--text-normal);
   cursor: pointer;
   font-size: var(--font-size);
   padding: 10px;
   width: 100%;
+  gap: 10px;
 }
 
 .project.active,
