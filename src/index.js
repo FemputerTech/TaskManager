@@ -47,3 +47,13 @@ document.getElementById("add-project").addEventListener("click", async () => {
   const newProject = new Project(db);
   await newProject.add();
 });
+
+// const testButton = document.getElementById("test-button");
+// testButton.addEventListener("click", () => console.log("clicked!"));
+
+// testButton.addEventListener("dblclick", () => console.log("double clicked!"));
+
+// testButton.addEventListener("contextmenu", (event) => {
+//   event.preventDefault();
+//   console.log("right clicked!");
+// });
