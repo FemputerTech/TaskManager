@@ -51,7 +51,7 @@ export class Project {
 
     // Click events
     projectDiv.addEventListener("dblclick", async (event) =>
-      this.rename(event)
+      this.rename(detailsDiv)
     );
     projectDiv.addEventListener("mousedown", () =>
       projectDiv.classList.add("clicked")
@@ -100,8 +100,9 @@ export class Project {
     detailsDiv.classList.add("active");
   }
 
-  rename() {
+  rename(detailsDiv) {
     const projectTitleInput = document.getElementById(`project-${this.id}`);
+    let displayTitle = detailsDiv.querySelector("h1");
     projectTitleInput.style.pointerEvents = "auto";
     projectTitleInput.removeAttribute("disabled");
     projectTitleInput.focus();
@@ -109,9 +110,9 @@ export class Project {
     const length = projectTitleInput.value.length;
     projectTitleInput.setSelectionRange(0, length);
 
-    projectTitleInput.addEventListener("input", () =>
-      console.log(projectTitleInput.value)
-    );
+    projectTitleInput.addEventListener("input", () => {
+      displayTitle.textContent = projectTitleInput.value;
+    });
 
     const updateTitle = async () => {
       const newTitle = projectTitleInput.value.trim();
