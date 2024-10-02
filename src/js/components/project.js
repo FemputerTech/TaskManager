@@ -64,7 +64,6 @@ export class Project {
     document
       .getElementById(`add-task-${this.ref}`)
       .addEventListener("click", async () => {
-        console.log("adding a task");
         const taskId = this.tasks.length + 1;
         const newTask = new Task(taskId, this.ref);
         const newTaskData = {
