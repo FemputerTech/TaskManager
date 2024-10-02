@@ -8,14 +8,14 @@ export class Project {
     this.icon = "fa-regular fa-file";
     this.title = title;
     this.category = category;
-    this.tasks = [];
+    // this.tasks = [];
   }
 
   async loadTasks() {
     try {
       const tasksCollection = collection(this.db, "projects", this.id, "tasks");
       const taskSnapshot = await getDocs(tasksCollection);
-      this.tasks = []; // Clear previous tasks to avoid duplicates
+      // this.tasks = []; // Clear previous tasks to avoid duplicates
       taskSnapshot.forEach((doc) => {
         const taskData = doc.data();
         const task = new Task(
@@ -28,7 +28,7 @@ export class Project {
           taskData.status
         );
         task.render();
-        this.tasks.push(task);
+        // this.tasks.push(task);
       });
     } catch (error) {
       console.error("Error loading tasks: ", error);
@@ -86,13 +86,15 @@ export class Project {
 
       projectId.textContent = `${this.title}`;
 
-      if (!addTaskButton) {
-        addTaskButton = document.createElement("button");
-        addTaskButton.id = "add-task";
-        addTaskButton.type = "button";
-        addTaskButton.textContent = "Add Task";
-        taskList.insertAdjacentElement("beforebegin", addTaskButton);
+      if (addTaskButton) {
+        addTaskButton.remove();
       }
+
+      addTaskButton = document.createElement("button");
+      addTaskButton.id = "add-task";
+      addTaskButton.type = "button";
+      addTaskButton.textContent = "Add Task";
+      taskList.insertAdjacentElement("beforebegin", addTaskButton);
 
       taskList.innerHTML = ""; //clear previous tasks
 
@@ -109,7 +111,7 @@ export class Project {
           );
           const newTask = new Task(this.id);
           await newTask.add(tasksCollection);
-          this.tasks.push(newTask);
+          // this.tasks.push(newTask);
         });
     });
   }
