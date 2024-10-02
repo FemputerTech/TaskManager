@@ -77,6 +77,16 @@ body {
   background-color: var(--neutral-4);
 }
 
+.project-title {
+  background-color: transparent;
+  border: none;
+  width: 100%;
+}
+
+.project-title:focus {
+  outline: none;
+}
+
 /* ****************** Main ****************** */
 
 .main {

@@ -1,59 +1,81 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
-import { Project } from "./project.js";
+import {
+  getDocuments,
+  getSubDocuments,
+  addDocument,
+} from "./js/firebase/firestore.js";
+import { Project } from "./js/components/project.js";
+import { Task } from "./js/components/task.js";
 
-// The Firebase configuration object is perfectly safe to include on the client side.
-// You secure your Firebase projects by using security rules and App Check.
-const firebaseConfig = {
-  apiKey: "AIzaSyCUxx-tNWhNT26ibU9dUh2qyoQu_h5vb0E",
-  authDomain: "task-manager-4842d.firebaseapp.com",
-  projectId: "task-manager-4842d",
-  storageBucket: "task-manager-4842d.appspot.com",
-  messagingSenderId: "53393795874",
-  appId: "1:53393795874:web:1e7ed391a100a740fc937b",
-  measurementId: "G-2SJFBR3SH7",
+const projects = [];
+
+const loadTasks = async (projectId) => {
+  try {
+    const tasksCollection = await getSubDocuments(
+      "projects",
+      projectId,
+      "tasks"
+    );
+    const tasks = [];
+    tasksCollection.forEach((task) => {
+      const newTask = new Task(
+        tasks.length + 1,
+        projectId,
+        task.name,
+        task.description,
+        task.dueDate,
+        task.priority,
+        task.status
+      );
+      tasks.push(newTask);
+    });
+    return tasks;
+  } catch (error) {
+    console.error("Error loading tasks:", error);
+    return [];
+  }
 };
 
-// Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
-console.log("Firebase! It's aliiiiiiiiive");
-
-const db = getFirestore(firebaseApp);
-
-const projectsCollection = collection(db, "projects");
-
-// Load projects from Firestore
-async function loadProjects() {
+const loadProjects = async () => {
   try {
-    const projectSnapshot = await getDocs(projectsCollection);
-    projectSnapshot.forEach(async (doc) => {
-      const projectData = doc.data();
-      const project = new Project(
-        db,
-        doc.id,
-        projectData.title,
-        projectData.category
+    const projectsCollection = await getDocuments("projects");
+    // projectsCollection.forEach(async (project) => {
+    // We need to wait for the load tasks function to complete before continuing
+    // to the next iteration. So instead of forEach, let's create an array of
+    // promises for loading tasks for each project with Promise.all to wait for
+    // all projects to be processed.
+    const projectPromises = projectsCollection.map(async (project) => {
+      const tasks = await loadTasks(project.ref);
+      const newProject = new Project(
+        project.ref,
+        projects.length + 1,
+        project.title,
+        project.category,
+        tasks
       );
-      project.render();
+      projects.push(newProject);
+      newProject.render();
     });
+    await Promise.all(projectPromises);
   } catch (error) {
-    console.log("Error loading projects: ", error);
+    console.error("Error loading projects:", errror);
   }
-}
+};
 
+// loadProjects().then(() => console.log(projects));
 loadProjects();
 
 document.getElementById("add-project").addEventListener("click", async () => {
-  const newProject = new Project(db);
-  await newProject.add();
+  const projectRef = await addDocument("projects", newProjectData);
+  const projectId = projects.length + 1;
+  const newProject = new Project(projectRef, projectId);
+  const newProjectData = {
+    title: newProject.title,
+    category: newProject.category,
+    icon: newProject.icon,
+  };
+
+  if (projectRef) {
+    projects.push(newProject);
+    newProject.render();
+  }
 });
-
-// const testButton = document.getElementById("test-button");
-// testButton.addEventListener("click", () => console.log("clicked!"));
-
-// testButton.addEventListener("dblclick", () => console.log("double clicked!"));
-
-// testButton.addEventListener("contextmenu", (event) => {
-//   event.preventDefault();
-//   console.log("right clicked!");
-// });
