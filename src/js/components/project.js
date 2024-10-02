@@ -20,15 +20,36 @@ export class Project {
   }
 
   render() {
+    // Render the side bar
     const projectListDiv = document.querySelector(".project-list");
     const projectDiv = document.createElement("div");
     projectDiv.className = "project";
     projectDiv.innerHTML = `
       <i class="${this.icon}"></i>
-      <input class="project-title" id=${this.id} type="text" value="${this.title}" disabled=true style="pointer-events: none;"></input>
+      <input class="project-title" id='project-${this.id}' type="text" value="${this.title}" disabled=true style="pointer-events: none;"></input>
     `;
     projectListDiv.appendChild(projectDiv);
 
+    // Render Details
+    const mainDiv = document.querySelector("main");
+    const detailsDiv = document.createElement("div");
+    detailsDiv.className = "details";
+    detailsDiv.innerHTML = `
+      <h1 class="display-title">${this.title}</h1>
+      <div class="task-content">
+        <button class="add-task" id="add-task-${this.ref}" type="button">Add Task</button>
+        <div class="task-list" id="task-list-${this.ref}"></div>
+      </div>
+    `;
+    mainDiv.appendChild(detailsDiv);
+
+    const taskListDiv = document.getElementById(`task-list-${this.ref}`);
+    taskListDiv.innerHTML = ""; //clear previous tasks
+    this.tasks.forEach((task) => {
+      task.render();
+    });
+
+    // Click events
     projectDiv.addEventListener("dblclick", async (event) =>
       this.rename(event)
     );
@@ -37,68 +58,51 @@ export class Project {
     );
     projectDiv.addEventListener("click", () => {
       projectDiv.classList.remove("clicked");
-      this.active(projectDiv);
+      this.active(detailsDiv);
     });
+
+    document
+      .getElementById(`add-task-${this.ref}`)
+      .addEventListener("click", async () => {
+        console.log("adding a task");
+        const taskId = this.tasks.length + 1;
+        const newTask = new Task(taskId, this.ref);
+        const newTaskData = {
+          name: newTask.name,
+          description: newTask.description,
+          dueDate: newTask.dueDate,
+          priority: newTask.priority,
+          status: newTask.status,
+        };
+        try {
+          const taskRef = await addSubDocument(
+            "projects",
+            this.ref,
+            "tasks",
+            newTaskData
+          );
+          if (taskRef) {
+            this.tasks.push(newTask);
+            newTask.render();
+          }
+        } catch (error) {
+          console.log("Error adding a new task:", error);
+        }
+      });
   }
 
-  active(projectDiv) {
-    const projectListDiv = document.querySelectorAll(".project");
-    projectListDiv.forEach((project) => {
-      if (project.classList.contains("active")) {
-        project.classList.remove("active");
+  active(detailsDiv) {
+    const detailsListDiv = document.querySelectorAll(".details");
+    detailsListDiv.forEach((details) => {
+      if (details.classList.contains("active")) {
+        details.classList.remove("active");
       }
     });
-    projectDiv.classList.add("active");
-
-    const projectId = document.querySelector(".project-id");
-    const taskList = document.querySelector(".task-list");
-    let addTaskButton = document.getElementById("add-task");
-
-    projectId.textContent = `${this.title}`;
-
-    if (addTaskButton) {
-      addTaskButton.remove();
-    }
-
-    addTaskButton = document.createElement("button");
-    addTaskButton.id = "add-task";
-    addTaskButton.type = "button";
-    addTaskButton.textContent = "Add Task";
-    taskList.insertAdjacentElement("beforebegin", addTaskButton);
-
-    taskList.innerHTML = ""; //clear previous tasks
-
-    this.tasks.forEach((task) => task.render());
-
-    document.getElementById("add-task").addEventListener("click", async () => {
-      const taskId = this.tasks.length + 1;
-      const newTask = new Task(taskId, this.ref);
-      const newTaskData = {
-        name: newTask.name,
-        description: newTask.description,
-        dueDate: newTask.dueDate,
-        priority: newTask.priority,
-        status: newTask.status,
-      };
-      try {
-        const taskRef = await addSubDocument(
-          "projects",
-          this.ref,
-          "tasks",
-          newTaskData
-        );
-        if (taskRef) {
-          this.tasks.push(newTask);
-          newTask.render();
-        }
-      } catch (error) {
-        console.log("Error adding a new task:", error);
-      }
-    });
+    detailsDiv.classList.add("active");
   }
 
   rename() {
-    const projectTitleInput = document.getElementById(this.id);
+    const projectTitleInput = document.getElementById(`project-${this.id}`);
     projectTitleInput.style.pointerEvents = "auto";
     projectTitleInput.removeAttribute("disabled");
     projectTitleInput.focus();
