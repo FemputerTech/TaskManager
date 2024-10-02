@@ -1,22 +1,34 @@
-import { addSubDocument, updateDocument } from "../firebase/firestore.js";
+import {
+  addSubDocument,
+  updateDocument,
+  deleteDocument,
+} from "../firebase/firestore.js";
+import { projects } from "../../index.js";
 import { Task } from "./task.js";
 
 export class Project {
-  constructor(ref, id, title = "New Title", category = "private", tasks = []) {
-    if (ref == null || ref == undefined) {
-      throw new Error("The 'ref' parameter is required.");
-    }
+  constructor(
+    id,
+    ref = null,
+    title = "New Title",
+    category = "private",
+    tasks = []
+  ) {
     if (id === null || id === undefined) {
       throw new Error("The 'id' parameter is required.");
     }
     {
-      this.ref = ref;
       this.id = id;
+      this.ref = ref;
       this.title = title;
       this.category = category;
       this.tasks = tasks;
       this.icon = "fa-regular fa-file";
     }
+  }
+
+  setRef(projectRef) {
+    this.ref = projectRef;
   }
 
   render() {
@@ -27,6 +39,7 @@ export class Project {
     projectDiv.innerHTML = `
       <i class="${this.icon}"></i>
       <input class="project-title" id='project-${this.id}' type="text" value="${this.title}" disabled=true style="pointer-events: none;"></input>
+      <button class="delete-button" id="delete-${this.id}" type="button">X</button>
     `;
     projectListDiv.appendChild(projectDiv);
 
@@ -50,9 +63,24 @@ export class Project {
     });
 
     // Click events
+    const deleteButton = document.getElementById(`delete-${this.id}`);
+    deleteButton.addEventListener("click", async () => {
+      const index = this.id - 1;
+      console.log(projects[index]);
+      // projects.pop(index);
+      // console.log(projects);
+    });
+    // projectDiv
+    //   .getElementById(`delete-${this.id}`)
+    //   .addEventListener("click", async () => {
+    //     // await deleteDocument("projects", this.ref);
+    //     console.log(projects[this.id]);
+    //   });
+
     projectDiv.addEventListener("dblclick", async (event) =>
       this.rename(detailsDiv)
     );
+
     projectDiv.addEventListener("mousedown", () =>
       projectDiv.classList.add("clicked")
     );
@@ -85,7 +113,7 @@ export class Project {
             newTask.render();
           }
         } catch (error) {
-          console.log("Error adding a new task:", error);
+          console.error("Error adding a new task:", error);
         }
       });
   }
@@ -110,7 +138,6 @@ export class Project {
   rename(detailsDiv) {
     const projectTitleInput = document.getElementById(`project-${this.id}`);
     let displayTitle = detailsDiv.querySelector("h1");
-    let isUpdating = false;
 
     projectTitleInput.style.pointerEvents = "auto";
     projectTitleInput.removeAttribute("disabled");
@@ -138,7 +165,7 @@ export class Project {
           try {
             await updateDocument("projects", this.ref, titleData);
           } catch (error) {
-            console.log("Error updating title:", error);
+            console.error("Error updating title:", error);
           }
         }
         projectTitleInput.style.pointerEvents = "none";
@@ -157,22 +184,16 @@ export class Project {
     // Keydown event listener for Enter key
     const onKeydown = async (event) => {
       if (event.key === "Enter") {
-        console.log("Enter");
         await updateTitle();
       }
     };
 
     // Blur event listener for clicking outside the input
     const onBlur = async () => {
-      console.log("Clicked");
       await updateTitle();
     };
 
     window.addEventListener("keydown", onKeydown);
     projectTitleInput.addEventListener("blur", onBlur);
-  }
-
-  delete() {
-    console.log("deleting");
   }
 }
