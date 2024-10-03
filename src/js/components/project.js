@@ -3,7 +3,7 @@ import {
   updateDocument,
   deleteDocument,
 } from "../firebase/firestore.js";
-import { projects } from "../../index.js";
+import { COLLECTION, SUBCOLLECTION, projects } from "../../index.js";
 import { Task } from "./task.js";
 
 export class Project {
@@ -103,9 +103,9 @@ export class Project {
         };
         try {
           const taskRef = await addSubDocument(
-            "projects",
+            COLLECTION,
             this.ref,
-            "tasks",
+            SUBCOLLECTION,
             newTaskData
           );
           if (taskRef) {
@@ -163,7 +163,7 @@ export class Project {
           const titleData = { title: newTitle };
           this.title = newTitle;
           try {
-            await updateDocument("projects", this.ref, titleData);
+            await updateDocument(COLLECTION, this.ref, titleData);
           } catch (error) {
             console.error("Error updating title:", error);
           }

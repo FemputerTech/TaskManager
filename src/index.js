@@ -6,14 +6,16 @@ import {
 import { Project } from "./js/components/project.js";
 import { Task } from "./js/components/task.js";
 
+export const COLLECTION = "projects";
+export const SUBCOLLECTION = "tasks";
 export const projects = [];
 
 const loadTasks = async (projectId) => {
   try {
     const tasksCollection = await getSubDocuments(
-      "projects",
+      COLLECTION,
       projectId,
-      "tasks"
+      SUBCOLLECTION
     );
     const tasks = [];
     tasksCollection.forEach((task) => {
@@ -37,7 +39,7 @@ const loadTasks = async (projectId) => {
 
 const loadProjects = async () => {
   try {
-    const projectsCollection = await getDocuments("projects");
+    const projectsCollection = await getDocuments(COLLECTION);
     // projectsCollection.forEach(async (project) => {
     // We need to wait for the load tasks function to complete before continuing
     // to the next iteration. So instead of forEach, let's create an array of
@@ -60,7 +62,6 @@ const loadProjects = async () => {
   }
 };
 
-// loadProjects().then(() => console.log(projects));
 loadProjects().then(() => {
   projects.forEach((project) => project.render());
 });
@@ -74,7 +75,7 @@ document.querySelector(".add-project").addEventListener("click", async () => {
     category: newProject.category,
     icon: newProject.icon,
   };
-  const projectRef = await addDocument("projects", newProjectData);
+  const projectRef = await addDocument(COLLECTION, newProjectData);
   if (projectRef) {
     projects.push(newProject);
     newProject.setRef(projectRef);
