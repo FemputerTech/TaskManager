@@ -38,8 +38,8 @@ export class Project {
     projectDiv.className = "project";
     projectDiv.innerHTML = `
       <i class="${this.icon}"></i>
-      <input class="project-title" id='project-${this.id}' type="text" value="${this.title}" disabled=true style="pointer-events: none;"></input>
-      <button class="delete-button" id="delete-${this.id}" type="button">X</button>
+      <input class="project-title" id='project-${this.ref}' type="text" value="${this.title}" disabled=true style="pointer-events: none;"></input>
+      <button class="delete-button" id="delete-${this.ref}" type="button">X</button>
     `;
     projectListDiv.appendChild(projectDiv);
 
@@ -63,20 +63,6 @@ export class Project {
     });
 
     // Click events
-    const deleteButton = document.getElementById(`delete-${this.id}`);
-    deleteButton.addEventListener("click", async () => {
-      const index = this.id - 1;
-      console.log(projects[index]);
-      // projects.pop(index);
-      // console.log(projects);
-    });
-    // projectDiv
-    //   .getElementById(`delete-${this.id}`)
-    //   .addEventListener("click", async () => {
-    //     // await deleteDocument("projects", this.ref);
-    //     console.log(projects[this.id]);
-    //   });
-
     projectDiv.addEventListener("dblclick", async (event) =>
       this.rename(detailsDiv)
     );
@@ -136,7 +122,7 @@ export class Project {
   }
 
   rename(detailsDiv) {
-    const projectTitleInput = document.getElementById(`project-${this.id}`);
+    const projectTitleInput = document.getElementById(`project-${this.ref}`);
     let displayTitle = detailsDiv.querySelector("h1");
 
     projectTitleInput.style.pointerEvents = "auto";
